@@ -60,43 +60,6 @@ const PROJECTS = [
     glyph: "CIV"
   },
   {
-    id: "battle-game",
-    title: "Battle Game",
-    langs: ["Java"],
-    tags: ["Java", "JavaFX", "OOP"],
-    summary: "Turn-based RPG battler with characters, weapons, items and special abilities.",
-    details: [
-      "Pick a character, fight opponents, and spend winnings in a weapon and item shop.",
-      "Separate classes for characters, battles, abilities, attack moves and items; sprites loaded from file."
-    ],
-    images: ["assets/img/battle/Knight.png", "assets/img/battle/Wizard.png", "assets/img/battle/Dragon.png", "assets/img/battle/Goblin.png"]
-  },
-  {
-    id: "nerdle",
-    title: "Nerdle Clone",
-    langs: ["Java"],
-    tags: ["Java", "JavaFX", "File I/O"],
-    summary: "Wordle-style math equation puzzle with persistent player stats.",
-    details: [
-      "Parses a typed equation into numbers and operators, validates it and evaluates both sides.",
-      "Green and purple tile feedback computed with per-letter used-flags so repeated symbols are handled correctly.",
-      "Puzzle equations loaded from a text file; player stats read from and written to disk."
-    ],
-    glyph: "1+2=3"
-  },
-  {
-    id: "wordsearch",
-    title: "Word Search",
-    langs: ["Java"],
-    tags: ["Java", "JavaFX", "Algorithms"],
-    summary: "Word search generator and game with themed puzzles loaded from files.",
-    details: [
-      "Places words at random grid positions and directions, checking for overlaps with conflicting letters.",
-      "Tracks the player's selection across cells; word lists (animals, Christmas, computer science) load from text files."
-    ],
-    glyph: "A·B·C"
-  },
-  {
     id: "sports-sim",
     title: "Sports Team Sim",
     langs: ["Python"],

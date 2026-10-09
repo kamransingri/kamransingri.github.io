@@ -3,7 +3,7 @@
 Portfolio site for Kamran Singri (UIUC, B.S. Statistics & CS, James Scholar) to link from his resume for employers. Static HTML/CSS/vanilla JS, no build step, hosted on GitHub Pages.
 
 ## Decisions already made
-- Style: dark techy (near-black, green/cyan accent, monospace accents). CSS variables are at the top of `css/style.css`.
+- Style: light, simple and clean (off-white, blue accent, system sans). CSS variables are at the top of `css/style.css`.
 - Hosting: GitHub Pages (`<username>.github.io`). Keep it static; no frameworks or bundlers.
 - Extras chosen: playable demo (Alien Shooter). Not chosen: headshot, contact form. Contact is `mailto:` only.
 - Phone number is deliberately NOT on the site (email only). Ask before adding it.
@@ -24,8 +24,9 @@ Portfolio site for Kamran Singri (UIUC, B.S. Statistics & CS, James Scholar) to 
 
 ## Open to-dos
 - Add resume PDF at `assets/Kamran_Singri_Resume.pdf` (the Resume button appears automatically).
-- Add GitHub and LinkedIn URLs (commented-out links at the end of the Contact section).
-- Add screenshots for Connect 4, Civ Tycoon, Nerdle, Word Search and Sports Sim (they currently use text placeholders).
+- Add GitHub URL (commented-out link in the Contact section); LinkedIn is added.
+- Add screenshots for Connect 4, Civ Tycoon and Sports Sim (they currently use text placeholders).
+- Battle Game, Nerdle Clone and Word Search cards were removed from `PROJECTS` on request (kept out for now; sprites in `assets/img/battle/` are unused).
 - Add GitHub repo links to project cards once the repos exist.
 - Test in a browser at desktop and ~375px width (not yet done after the first build).
 - Optional: compress `demos/alien-shooter/Pictures/SpaceBackground.jpg` (1.7 MB).

@@ -37,7 +37,7 @@ window.SITE = {
         "Taught intro computer science to classes of 15+ elementary school students.",
       details: [
         "Turned abstract programming ideas into lessons that made sense to elementary schoolers.",
-        "Ran large-group activities for up to 60 students per session and kept them moving.",
+        "Ran large-group activities for up to 60 students per session.",
         "Designed and ran hands-on activities with a team of other mentors to reinforce core CS concepts."
       ]
     },
@@ -51,7 +51,7 @@ window.SITE = {
         "Tutored high school students twice a week in everything from geometry to calculus.",
       details: [
         "Worked one on one with 5+ students a session, using visual demonstrations and worked examples.",
-        "Worked out alternative ways to explain things with other tutors for students who needed extra help."
+        "Worked with the other tutors on different ways to explain a topic when a student was stuck."
       ]
     }
   ],
@@ -127,7 +127,7 @@ window.SITE = {
       featured: true,
       status: "In progress",
       summary:
-        "A Data Science Club team project on a hypothetical NBA four-point line, using five seasons of shot-distance data for the league's top 3-point shooters.",
+        "Data Science Club team project on a hypothetical NBA four-point line, built on five seasons of shot-distance data for the league's top 3-point shooters.",
       tags: ["Python", "Data"],
       stack: ["Python", "pandas", "Team project"],
       context: "UIUC Data Science Club · team project · Fall 2026",
@@ -162,7 +162,7 @@ window.SITE = {
           ["Git with a team", "Working in a shared repo in the club's GitHub organization."]
         ],
         learned:
-          "Mostly, so far, how to work in a shared repo: keeping loading and graphing in separate files means teammates can work in parallel. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
+          "So far, mostly how to work in a shared repo: with loading and graphing in separate files, teammates can work in parallel. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
         note: ""
       }
     },
@@ -251,7 +251,7 @@ window.SITE = {
           ["Boss state machine", "Chase, pause, burst-fire, resume, all driven by timers."]
         ],
         learned:
-          "Looking back at it, the whole game is about 780 lines and 33 functions with no classes, and you can feel it: a lot of state is shared globally. If I rebuilt it, I'd give every entity a class with its own update and draw.",
+          "The whole game is about 780 lines and 33 functions with no classes, and it shows: most state lives in global variables. If I rebuilt it, I'd give every entity a class with its own update and draw methods.",
         note: ""
       }
     },
@@ -273,9 +273,9 @@ window.SITE = {
       featured: false,
       status: "In progress",
       summary:
-        "Early-stage Python project to collect Champaign-Urbana MTD real-time bus data and measure how reliable routes actually are.",
+        "Early-stage Python project that will collect Champaign-Urbana MTD real-time bus data and measure how reliable each route actually is.",
       details:
-        "Phase 1 of 5, the project skeleton, is in place: validated config loading (reports every problem at once and rejects placeholder values), UTC rotating-file logging, pytest tests, and CI with ruff on GitHub Actions. Next up: the GTFS-Realtime feed collector.",
+        "Phase 1 of 5 (the skeleton) is in place: config loading that reports every problem at once and rejects placeholder values, UTC rotating-file logs, pytest tests, and ruff + pytest in GitHub Actions CI. Next: the GTFS-Realtime feed collector.",
       tags: ["Python", "Data"],
       stack: ["Python", "pytest", "GitHub Actions"],
       links: []
@@ -345,7 +345,7 @@ window.SITE = {
   contact: {
     heading: "Get in touch",
     text:
-      "I'm looking for data science and software engineering internships, and I'm happy to talk about club projects too. Email is the fastest way to reach me."
+      "I'm looking for data science and software engineering internships, and I'm always up for talking about club projects. Email is the fastest way to reach me."
   },
 
   /* Real data behind the NBA chart, aggregated from the team's committed CSV

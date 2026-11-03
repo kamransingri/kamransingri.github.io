@@ -1,109 +1,108 @@
 # Notes for Kamran
 
-_Last updated: Phase 5 complete._
+_Final: all six phases done._
 
-## Status
-- [x] Phase 1: inventory and project selection
-- [x] Phase 2: core site
-- [x] Phase 3: project write-ups and visuals
-- [x] Phase 4: interactivity
-- [x] Phase 5: QA
-- [ ] Phase 6: polish
+## What was built
+- **A redesigned personal site** on the branch **`site-redesign`** of your `kamransingri.github.io` repo. Your live `main` branch is untouched.
+- **One-page home:**
+  - **Intro:** name, "UIUC · Statistics & CS · data science", and links to your resume PDF, GitHub, LinkedIn and email.
+  - **Sections:** About, an Experience timeline (expandable details), Featured projects (with a tag filter), Other projects, Education + skills, Leadership & activities, and Contact (with a copy-email button).
+- **Four project write-ups** in `projects/`. Each covers the question, what I built, key techniques, what I learned, and links.
+  - **Space Tower Defense:** your sprites, plus a diagram of the class hierarchies and systems.
+  - **NBA Four-Point Line:** an interactive chart of 3P% by distance, computed from your team's real CSVs, with hover/keyboard tooltips and a data table.
+  - **Connect 4 variant:** a labelled illustration of the breadth-first infection.
+  - **Alien Shooter:** two real gameplay screenshots, two verbatim code excerpts, and a link to the playable game.
+- **Design:**
+  - Source Serif 4 + IBM Plex Mono (self-hosted), warm paper/ink colors and one "red pen" accent.
+  - Section dividers drawn as chart axes with tick marks.
+  - Light/dark toggle that follows your system theme and remembers your choice.
+  - Full reasoning is in `DECISIONS.md`.
+- **Content:** all of it is in **`content/data.js`**. The HTML also carries a prerendered copy (`node tools/prerender.mjs`), so the site works with JavaScript off.
+- **Extras:** favicon (KS), OG preview image with a real-data sparkline, print stylesheet, 404 page, and resume PDF (`assets/resume.pdf`, converted from `KAMRAN_SINGRI.docx`).
+- **Quality:**
+  - Lighthouse: home page 96 (mobile) / 100 (desktop) for performance, 100 for accessibility, best practices and SEO. Project pages: 98+ / 100.
+  - Text contrast meets WCAG AA in both themes.
+  - No console errors and no broken internal links.
+  - Every interactive control works with the keyboard and respects reduced motion.
+  - Images shrank the site from 5.0 MB to 1.7 MB.
+- **Docs:** `README.md` covers how to edit, preview and deploy. `content/inventory.md` lists every fact with its source. `content/projects-ranking.md` has the project scoring.
 
-## Important: where the work is and why it isn't pushed
-- **Where:** everything is on a new branch, `site-redesign`, in a fresh clone of your `kamransingri.github.io` repo. Your live `main` branch is untouched.
-- **Why it isn't pushed:** this cloud session wasn't allowed to get push access to the repo; the request was blocked by the session's permission settings. Commits are made locally after every phase.
-- **Fallback:** after each phase I also send you a zip of the site and a `git bundle` of the branch in the chat, so nothing is lost if the session ends.
-  - To use the bundle, run `git fetch <bundle-file> site-redesign:site-redesign` inside your repo, then push the branch yourself.
+## The work isn't pushed yet: please do this
+This cloud session wasn't allowed push access to your repo; the request was blocked by the session's permission settings. All work is committed locally on `site-redesign`, and I sent you two files in the chat:
+- **`kamransingri-site-redesign.bundle`**, a git bundle of the branch with full history. In your local clone of `kamransingri.github.io`:
+  ```bash
+  git fetch /path/to/kamransingri-site-redesign.bundle site-redesign:site-redesign
+  git push -u origin site-redesign
+  ```
+- **`kamransingri-site.zip`**, a plain copy of the site files, if you'd rather upload them directly.
 
-## What I could and couldn't access
-- **Couldn't open:** the Windows paths in your message (`C:\Users\kamra\...`), including `Kamran_Singri_Resume_v3.docx`, `Claude Resume Version 1.docx` and the `Final Version Projects CSA&CSP` folder. The session runs in a cloud container, not on your PC.
-- **Used instead:**
-  - The two resumes you uploaded. `KAMRAN_SINGRI.docx` (Oct 22) is the newest, so it wins any conflict.
-  - Your old site (already in the repo), whose project descriptions were written from your project code in an earlier session.
-  - Your GitHub repos.
-- **Not received:** the Common App activities list wasn't attached, so nothing on the site comes from it.
+## Deployment steps
+1. Push `site-redesign` (above), then open a pull request into `main` on GitHub and review it.
+2. Merge it.
+3. **Settings → Pages → Source:** "Deploy from a branch", **Branch:** `main` / `(root)`, **Save** (skip if already set).
+4. Wait about a minute, then open https://kamransingri.github.io. Click the GitHub and LinkedIn links once; this sandbox couldn't reach those sites to check them.
+5. Optional: paste the URL into LinkedIn's Post Inspector to check the preview card.
+
+More detail is in `README.md`.
 
 ## Please confirm
-1. **Java projects (Tower Defense, Connect 4, Civ Tycoon, Sports Sim):** descriptions come from your old site, not from code I could read this time. Please skim them for accuracy.
-2. **NBA four-point line (Data Science Club):** your brief left "I did Y" blank. From GitHub, your commit reorganized and renamed the files and set up `nba_four_point_graphs.py`. That's all the site claims, plus "the team is working on the analysis". Tell me what you actually own (graphs? analysis?) and I'll update it.
-3. **NBA chart:** the chart on the site (3P% by shot distance) is one I computed from the team's committed CSVs for this site. It's labelled that way. Remove it if you'd rather not show unfinished club work.
-4. **Apartment app with friends:** mentioned in your brief's example, but I found no repo for it. Not on the site.
-5. **API_Autopilot:** you have push access, but all 141 commits are by Ishaan and Ayush Kansal. Left off the site. Tell me your role if you want it added.
-6. **"Directed activities for up to 60 students":** in the Oct resume but not the Aug one. Used, because the newest resume wins.
-7. **Claims dropped from the old site (not in either resume):**
-   - "25+ meets" and "helped coaches with event setup" (Track)
-   - "Ran in 4+ fundraising races" (Kids Against Hunger)
-   - Maven and IntelliJ in skills
+1. **Java project facts (Tower Defense, Connect 4, Civ Tycoon, Sports Sim):**
+   - Your projects folder was on your PC (`C:\...` / `D:\...`), which this cloud session can't open.
+   - These descriptions come from your previous site's data, which was written from that code. Please skim them.
+   - If you push those projects to GitHub, add `links: [{ label: "Code", href: "…" }]` in `data.js`.
+2. **NBA four-point line, your role:**
+   - The site only claims what GitHub shows: you reorganized and renamed the files and created `nba_four_point_graphs.py`.
+   - Tell me (or edit `data.js`) what else you own: graphs, analysis, the presentation.
+   - The team's exact research question isn't stated anywhere, so the page uses neutral wording.
+3. **NBA chart:** I computed it from the team's committed CSVs; the caption says it's not a team result. Remove it (`visual` in `data.js`) if you'd rather not show unfinished club work.
+4. **"What I learned" paragraphs:** these are my drafts, grounded in the code. They're the most personal part of each page, so please rewrite them in your own words.
+5. **"Apartment app with friends":** your brief's example mentioned it, but I found no repo or document for it. Not on the site.
+6. **API_Autopilot:** all 141 commits are by Ishaan and Ayush Kansal, so it's left off. Add it if you had a role.
+7. **"Up to 60 students per session" (CS Kids):** this is in your Oct 2026 resume but not the Aug one. Used, because the newest resume wins.
+8. **Old-site claims I dropped** because neither resume has them:
+   - Track: "25+ meets", "helped coaches with event setup"
+   - Kids Against Hunger: "ran in 4+ fundraising races"
+   - Skills: "Maven, IntelliJ"
    - Re-add any of these if they're true.
-8. **Graduation and contact details:** expected graduation May 2030, GitHub `kamransingri` and LinkedIn `kamran-singri-745344428` were taken from your resume, repo owner name and old site, because the brief left them blank.
-9. **Resume PDF:** `assets/resume.pdf` is converted from `KAMRAN_SINGRI.docx`. It includes your phone number and home town, as your resume does. The page itself shows email only.
-10. **Bus Reliability Tracker:** it's listed as "in progress, phase 1 of 5". Its LICENSE still says "YOUR NAME HERE", and it is a private repo, so the site doesn't link it.
+9. **Not received:**
+   - Common App activities list: not attached, so nothing comes from it.
+   - `Kamran_Singri_Resume_v3.docx` and `Claude Resume Version 1.docx`: on your PC, so I couldn't open them.
+10. **Blank fields in your brief:** filled from your documents and accounts:
+    - name "Kamran Singri"
+    - graduation May 2030
+    - GitHub `kamransingri`
+    - LinkedIn `kamran-singri-745344428` (from the old site)
+    - email kamransingri@gmail.com
+11. **Resume PDF:** it includes your phone number and Roselle, IL, exactly like your resume. The web pages show only your email. Replace `assets/resume.pdf` whenever you update your resume.
+12. **About copy:** the brief said "music". I wrote "most of my free time goes to sports, music, the gym and cooking" rather than guessing whether you play or listen.
+13. **Alien Shooter change:** I added two `continue` lines in `moveBadLaser` (`demos/alien-shooter/script.js`) to stop a possible TypeError. I left everything else as is. Optional cleanups for you:
+    - a per-frame `console.log(wave)`
+    - the `H` key that sets health to 3000
+    - the "Coordinates:" debug line
+    - boss fireballs moving faster than intended
+    - click-aim ignoring the canvas position
+14. **Bus Reliability Tracker:**
+    - It's described as "in progress, phase 1 of 5", without a link, because the repo is private.
+    - Its LICENSE still says "YOUR NAME HERE".
+    - Five of its six declared dependencies aren't used yet.
+15. **"Fall 2026" for the Data Science Club:** inferred from the repo's October 2026 commits.
 
 ## Security scan
-- **Bus Reliability Tracker** (`transit-bus-delay`): only `.env.example`, containing placeholders (`CHANGE_ME`, `you@example.com`). No real `.env`, no keys.
+- **`transit-bus-delay`:** only `.env.example` with placeholders (`CHANGE_ME`, `you@example.com`). No real `.env`, no keys.
 - **API_Autopilot:** only fake AWS-style keys used as test fixtures. Nothing copied.
-- **NBA repo and Alien Shooter:** no secrets. The NBA repo has committed `__pycache__/*.pyc` files (harmless, but worth a `.gitignore`).
-- **Personal data:** your phone number is in the resume PDF only, not in the site's HTML.
+- **NBA repo and Alien Shooter:** no secrets. The NBA repo commits `__pycache__/*.pyc`; consider adding a `.gitignore`.
+- **This site:** no keys or tokens. Your phone number appears only inside the resume PDF.
 
-## High-school items cut
-- **Business Professionals of America:** competition entries; no leadership or technical depth.
-- **Track & Field:** folded into a one-line activity (recruiting 5+ athletes) and the About text.
+## Decisions worth knowing
+Full list in `DECISIONS.md`.
+- **Featured:** Tower Defense, NBA Four-Point Line, Connect 4, Alien Shooter.
+- **Other:** Civ Tycoon, Bus Tracker, Sports Sim.
+- **Excluded:** API_Autopilot, the empty repos, and Battle/Nerdle/Word Search, which you'd removed before.
+- **High-school items kept:** CS Kids, Math Tutoring, Kids Against Hunger. Track is now one line. BPA is cut.
+- **No fifth write-up page:** nothing left was strong or first-hand enough. The Bus Tracker is the best candidate once it collects real data.
+- **The research sites** (brittanychiang.com etc.) were blocked by this session's network policy, so the design notes come from what I already knew about them.
 
-## Project pages (Phase 3)
-- **Pages:** `projects/space-tower-defense.html`, `nba-four-point-line.html`, `connect-4-variant.html`, `alien-shooter.html`.
-- **Visuals:**
-  - **Alien Shooter:** two real screenshots, taken by running the game in a headless browser. For the boss shot I skipped to wave 4 from the browser console. There are also two verbatim code excerpts, `bossAttack` and `collision`.
-  - **NBA:** a chart computed from the team's CSVs, plus your `nba_four_point_graphs.py` shown verbatim.
-  - **Tower Defense:** your real sprites, plus a simple diagram of the class hierarchies and game systems. It uses descriptive labels, not your actual class names, which I couldn't see.
-  - **Connect 4:** a labelled illustration of the breadth-first infection. The board layout is made up; the spread logic follows the description of your code.
-- **Please confirm:** every "What I learned" paragraph is my draft based on the code and project facts. Please rewrite them in your own words; they're the most personal part of each page.
-- **Please confirm (Tower Defense & Connect 4):** the pages say "Code isn't public yet." Push those projects to GitHub and add a `links` entry in `content/data.js` to show a code link.
-
-## Interactivity (Phase 4)
-All of these were tested in headless Chromium, with no console errors:
-- **Sticky nav** marks the section in view (`aria-current`).
-- **Project filter** uses tags from `data.js` (Java, Games, Python, Data, JavaScript) and shows a "2 of 7 shown" count.
-- **Experience entries** expand with native `<details>`, so they work with keyboard and without JS.
-- **Copy-email button** says "Copied" for 2 s. It falls back to `execCommand`, then a "Press Ctrl+C" hint.
-- **Light/dark toggle** follows the system theme until you click it; the choice is saved to localStorage, wrapped in try/catch.
-- **Chart tooltips** work on hover, tap and keyboard. The chart is one tab stop, arrow keys move between points, and Escape closes the tooltip.
-- **JS off:** all content is still there (prerendered), and the JS-only controls stay hidden.
-- **Reduced motion:** with `prefers-reduced-motion`, smooth scrolling and any transitions are off.
-
-## QA results (Phase 5)
-- **Screenshots:** 375, 768 and 1440 px in light and dark. No horizontal scrolling and no console errors on any page.
-- **Lighthouse** (v12, local Chromium):
-
-  | Page | Performance | Accessibility | Best practices | SEO |
-  |---|---|---|---|---|
-  | Home, mobile | 95 | 100 | 100 | 100 |
-  | Home, desktop | 100 | 100 | 100 | 100 |
-  | NBA page, mobile | 98 | 100 | 100 | 100 |
-  | NBA page, desktop | 100 | 100 | 100 | 100 |
-
-  - The leftover flags are text compression and cache headers. They come from the local test server; GitHub Pages serves gzip with caching.
-- **Contrast (WCAG AA):**
-  - Body text is 15.9:1 (light) and 14.8:1 (dark).
-  - Muted text is at least 6.1:1, and the accent is at least 5.4:1.
-  - Tick marks were darkened to at least 3.2:1 against the page background (it's a non-text graphic).
-- **Links:**
-  - Every internal link, image, script and anchor on all 5 pages resolves.
-  - External links (GitHub, LinkedIn) can't be fetched from this sandbox because the network policy blocks them, so please click them once after deploying.
-- **Images:** the site went from 5.0 MB to 1.7 MB.
-  - Sprites became webp at 192 px or smaller.
-  - Screenshots are webp, with 640 px copies for phones.
-  - The Alien Shooter background went from 6000×4000 / 1.7 MB to 1500 px / 120 KB, and its other large PNGs shrank to 300 px or smaller. The game sets every sprite size in code, so gameplay is unchanged.
-- **Alien Shooter code change (please confirm):** I added two `continue` lines in `moveBadLaser` (`demos/alien-shooter/script.js`) so a destroyed enemy laser isn't read again. Before, that could throw a TypeError in the console.
-  - Known issues I left alone, because the game is your code: a per-frame `console.log(wave)`, an `H` key that sets health to 3000, a "Coordinates:" debug line under the canvas, boss fireballs moving faster than intended, and click-aim that ignores where the canvas sits on the page.
-- **Truth audit:** every claim was checked against `content/inventory.md` and the project surveys. I softened:
-  - "Most of what I've built is Java" to "A lot of…"
-  - "real-time strategy game" to "real-time game"
-  - superlatives such as "first" and "biggest" in the What-I-learned sections
-  - the NBA research question, which is now neutral because I don't know the team's exact question
-  - "reshaping" the data, which your commit didn't do
-  - "listening to music" to just "music"
-- **README:** rewritten with editing, local preview and step-by-step deployment.
-
-## Next
-Phase 6: polish.
+## Ideas for next time
+- Push the Java projects to GitHub and link them. Add one screenshot each for Connect 4 and Civ Tycoon (`visual: { type: "image", … }`).
+- When the bus collector runs, add a real delay chart and turn it into a featured data project.
+- Once the NBA analysis is done, replace my chart with the team's actual graphs and findings.

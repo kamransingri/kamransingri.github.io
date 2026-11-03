@@ -32,7 +32,7 @@
   --text: #1c1b19;
   --muted: #5b564e;
   --rule: #d8d2c7;
-  --tick: #a69f92;
+  --tick: #8a8377;
   --accent: #a53d1b;          /* "red pen" vermilion */
   --accent-ink: #ffffff;
   --accent-soft: rgba(165, 61, 27, 0.1);
@@ -55,7 +55,7 @@
     --text: #ebe7df;
     --muted: #a9a297;
     --rule: #37342f;
-    --tick: #625c53;
+    --tick: #756e64;
     --accent: #f0906e;
     --accent-ink: #161513;
     --accent-soft: rgba(240, 144, 110, 0.12);
@@ -69,7 +69,7 @@
   --text: #ebe7df;
   --muted: #a9a297;
   --rule: #37342f;
-  --tick: #625c53;
+  --tick: #756e64;
   --accent: #f0906e;
   --accent-ink: #161513;
   --accent-soft: rgba(240, 144, 110, 0.12);

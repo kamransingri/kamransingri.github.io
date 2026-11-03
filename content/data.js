@@ -18,12 +18,12 @@ window.SITE = {
     linkedin: "https://www.linkedin.com/in/kamran-singri-745344428/",
     resume: "assets/resume.pdf",
     siteUrl: "https://kamransingri.github.io/",
-    location: "Champaign, IL · from Roselle, IL"
+    location: ""
   },
 
   about: [
-    "I study Statistics & Computer Science at UIUC as part of the James Scholar Honors Program. Most of what I've built so far is Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data. This semester I'm on a Data Science Club team looking at what a four-point line would mean for NBA shooters, and I've started a project tracking how reliable Champaign's buses actually are.",
-    "Before college I mentored elementary schoolers through Computer Science Kids, tutored high school students in math, and ran track. I've also packed meals with Kids Against Hunger since 2016. When I'm not at a keyboard I'm usually at the gym, playing sports, listening to music, or cooking."
+    "I study Statistics & Computer Science at UIUC as part of the James Scholar Honors Program. A lot of what I've built so far is in Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data. This semester I'm on a Data Science Club team looking at what a four-point line would mean for NBA shooters, and I've started a project tracking how reliable Champaign's buses actually are.",
+    "Before college I mentored elementary schoolers through Computer Science Kids, tutored high school students in math, and ran track. I've also packed meals with Kids Against Hunger since 2016. Away from the keyboard, most of my free time goes to sports, music, the gym and cooking."
   ],
 
   experience: [
@@ -72,16 +72,16 @@ window.SITE = {
         type: "sprites",
         caption: "Sprites from the game: three robot defenders and two of the aliens.",
         images: [
-          { src: "assets/img/pvz/defenders/RobotShooter.png", alt: "Robot Shooter defender sprite" },
-          { src: "assets/img/pvz/defenders/RobotShield.png", alt: "Robot Shield defender sprite" },
-          { src: "assets/img/pvz/defenders/RobotMineActivated.png", alt: "Robot Mine defender sprite" },
-          { src: "assets/img/pvz/enemies/BasicAlien.png", alt: "Basic Alien enemy sprite" },
-          { src: "assets/img/pvz/enemies/DashingAlien.png", alt: "Dashing Alien enemy sprite" }
+          { src: "assets/img/pvz/defenders/RobotShooter.webp", alt: "Robot Shooter defender sprite" },
+          { src: "assets/img/pvz/defenders/RobotShield.webp", alt: "Robot Shield defender sprite" },
+          { src: "assets/img/pvz/defenders/RobotMineActivated.webp", alt: "Robot Mine defender sprite" },
+          { src: "assets/img/pvz/enemies/BasicAlien.webp", alt: "Basic Alien enemy sprite" },
+          { src: "assets/img/pvz/enemies/DashingAlien.webp", alt: "Dashing Alien enemy sprite" }
         ]
       },
       page: {
         question:
-          "What does it take to build a real-time strategy game with an economy, waves that get harder, and lots of different objects interacting every frame?",
+          "What does it take to build a real-time game with an economy, waves that get harder, and lots of different objects interacting every frame?",
         built: [
           "A lane-based tower defense game: robot defenders hold the rows while waves of aliens push in.",
           "Enemies and defenders are two class hierarchies built on inheritance and polymorphism: Basic, Dashing and Stealer aliens on one side, Shooter, Shield and Mine robots on the other.",
@@ -102,11 +102,11 @@ window.SITE = {
             type: "sprites",
             caption: "More of the game's sprites: Energy, the two power-ups, the Stealer Alien and the Shooter's laser.",
             images: [
-              { src: "assets/img/pvz/Energy.png", alt: "Energy pickup sprite" },
-              { src: "assets/img/pvz/PowerUpSlowDownEnemy.png", alt: "Slow-down-enemies power-up sprite" },
-              { src: "assets/img/pvz/PowerUpSpeedUpDefenderAttack.png", alt: "Speed-up-defenders power-up sprite" },
-              { src: "assets/img/pvz/enemies/StealerAlien.png", alt: "Stealer Alien sprite" },
-              { src: "assets/img/pvz/projectiles/RobotShooterLaser.png", alt: "Robot Shooter laser sprite" }
+              { src: "assets/img/pvz/Energy.webp", alt: "Energy pickup sprite" },
+              { src: "assets/img/pvz/PowerUpSlowDownEnemy.webp", alt: "Slow-down-enemies power-up sprite" },
+              { src: "assets/img/pvz/PowerUpSpeedUpDefenderAttack.webp", alt: "Speed-up-defenders power-up sprite" },
+              { src: "assets/img/pvz/enemies/StealerAlien.webp", alt: "Stealer Alien sprite" },
+              { src: "assets/img/pvz/projectiles/RobotShooterLaser.webp", alt: "Robot Shooter laser sprite" }
             ]
           }
         ],
@@ -117,7 +117,7 @@ window.SITE = {
           ["Timed systems", "A 30-second wave timer with randomized wave composition and scaling difficulty."]
         ],
         learned:
-          "This was my biggest exercise in object-oriented design: with six unit types, an economy and a wave system all running in one loop, the class hierarchies are what kept the game manageable.",
+          "This project was a real workout in object-oriented design. With six unit types, an economy and a wave system all running in one loop, the class hierarchies are what keep the game manageable.",
         note: "Code isn't public yet."
       }
     },
@@ -142,9 +142,9 @@ window.SITE = {
       },
       page: {
         question:
-          "If the NBA painted a four-point line, where would it go, and how would it change the value of a deep shot? Our team in UIUC's Data Science Club is working through that with real shooting data.",
+          "What could a four-point line look like in the NBA? Our team in UIUC's Data Science Club is exploring that with real shooting data.",
         built: [
-          "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from 22 ft out to 40+ ft, plus distance-bucket summaries for each player.",
+          "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from the arc out to 40+ ft, plus distance-bucket summaries for each player.",
           "My part so far: I reorganized the repo and set up the project's structure. I renamed the loader to `nba_four_point_datasets.py` and created `nba_four_point_graphs.py`, which imports the loaded DataFrame so graphing code stays separate from data loading.",
           "The analysis itself is still in progress with the team."
         ],
@@ -157,8 +157,8 @@ window.SITE = {
           }
         ],
         techniques: [
-          ["pandas", "Loading and reshaping the shot-distance CSVs."],
-          ["Module structure", "Separating data loading from graphing so teammates can work on graphs without touching the cleaning code."],
+          ["pandas", "Loading the shot-distance CSVs into DataFrames."],
+          ["Module structure", "Separating data loading from graphing so teammates can work on graphs without touching the data-loading code."],
           ["Git with a team", "Working in a shared repo in the club's GitHub organization."]
         ],
         learned:
@@ -190,12 +190,12 @@ window.SITE = {
           "Each piece type is its own class, so adding a new piece doesn't touch the core game logic."
         ],
         techniques: [
-          ["Breadth-first spread", "The infection expands in generations from where it lands, which gives a visible wave instead of an instant fill."],
+          ["Breadth-first spread", "The infection expands one generation at a time from where it lands, up to 20 tiles."],
           ["Modular piece classes", "Special pieces plug into the board without changes to the core turn logic."],
           ["JavaFX animation", "Timed effects and animations driven by an AnimationTimer."]
         ],
         learned:
-          "The infection piece was my first real use of a breadth-first spread. Processing it one generation at a time, instead of all at once, is what let each step be animated.",
+          "The infection piece is where breadth-first search stopped being abstract for me: handle one generation, then the next, and stop at a cap. Keeping every special piece in its own class also made the shop easy to extend.",
         note: "Code isn't public yet."
       }
     },
@@ -211,7 +211,7 @@ window.SITE = {
       links: [{ label: "Play it", href: "demos/alien-shooter/index.html" }],
       visual: {
         type: "image",
-        src: "assets/img/alien-shooter.webp",
+        src: "assets/img/alien-shooter.webp", small: "assets/img/alien-shooter-640.webp",
         alt: "Alien Shooter gameplay: the astronaut on a starfield with aliens closing in",
         caption: "Screenshot from the playable build."
       },
@@ -227,7 +227,7 @@ window.SITE = {
         extras: [
           {
             type: "image",
-            src: "assets/img/alien-shooter-boss.webp",
+            src: "assets/img/alien-shooter-boss.webp", small: "assets/img/alien-shooter-boss-640.webp",
             alt: "Alien Shooter boss wave: the boss in a space-station room, with pink fireballs flying outward",
             caption: "Boss wave: the fireballs are mid-burst after the boss reaches your last position."
           },

@@ -104,7 +104,9 @@
   function image(v, prefix) {
     return (
       '<figure class="visual visual-image">' +
-      '<img src="' + esc(url(v.src, prefix)) + '" alt="' + esc(v.alt) + '" width="1200" height="640" loading="lazy" decoding="async">' +
+      '<img src="' + esc(url(v.src, prefix)) + '"' +
+      (v.small ? ' srcset="' + esc(url(v.small, prefix)) + ' 640w, ' + esc(url(v.src, prefix)) + ' 1200w" sizes="(min-width: 880px) 34rem, 100vw"' : "") +
+      ' alt="' + esc(v.alt) + '" width="1200" height="640" loading="lazy" decoding="async">' +
       (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
       "</figure>"
     );

@@ -1,13 +1,13 @@
 # Notes for Kamran
 
-_Last updated: Phase 4 complete._
+_Last updated: Phase 5 complete._
 
 ## Status
 - [x] Phase 1: inventory and project selection
 - [x] Phase 2: core site
 - [x] Phase 3: project write-ups and visuals
 - [x] Phase 4: interactivity
-- [ ] Phase 5: QA
+- [x] Phase 5: QA
 - [ ] Phase 6: polish
 
 ## Important: where the work is and why it isn't pushed
@@ -71,5 +71,39 @@ All of these were tested in headless Chromium, with no console errors:
 - **JS off:** all content is still there (prerendered), and the JS-only controls stay hidden.
 - **Reduced motion:** with `prefers-reduced-motion`, smooth scrolling and any transitions are off.
 
+## QA results (Phase 5)
+- **Screenshots:** 375, 768 and 1440 px in light and dark. No horizontal scrolling and no console errors on any page.
+- **Lighthouse** (v12, local Chromium):
+
+  | Page | Performance | Accessibility | Best practices | SEO |
+  |---|---|---|---|---|
+  | Home, mobile | 95 | 100 | 100 | 100 |
+  | Home, desktop | 100 | 100 | 100 | 100 |
+  | NBA page, mobile | 98 | 100 | 100 | 100 |
+  | NBA page, desktop | 100 | 100 | 100 | 100 |
+
+  - The leftover flags are text compression and cache headers. They come from the local test server; GitHub Pages serves gzip with caching.
+- **Contrast (WCAG AA):**
+  - Body text is 15.9:1 (light) and 14.8:1 (dark).
+  - Muted text is at least 6.1:1, and the accent is at least 5.4:1.
+  - Tick marks were darkened to at least 3.2:1 against the page background (it's a non-text graphic).
+- **Links:**
+  - Every internal link, image, script and anchor on all 5 pages resolves.
+  - External links (GitHub, LinkedIn) can't be fetched from this sandbox because the network policy blocks them, so please click them once after deploying.
+- **Images:** the site went from 5.0 MB to 1.7 MB.
+  - Sprites became webp at 192 px or smaller.
+  - Screenshots are webp, with 640 px copies for phones.
+  - The Alien Shooter background went from 6000×4000 / 1.7 MB to 1500 px / 120 KB, and its other large PNGs shrank to 300 px or smaller. The game sets every sprite size in code, so gameplay is unchanged.
+- **Alien Shooter code change (please confirm):** I added two `continue` lines in `moveBadLaser` (`demos/alien-shooter/script.js`) so a destroyed enemy laser isn't read again. Before, that could throw a TypeError in the console.
+  - Known issues I left alone, because the game is your code: a per-frame `console.log(wave)`, an `H` key that sets health to 3000, a "Coordinates:" debug line under the canvas, boss fireballs moving faster than intended, and click-aim that ignores where the canvas sits on the page.
+- **Truth audit:** every claim was checked against `content/inventory.md` and the project surveys. I softened:
+  - "Most of what I've built is Java" to "A lot of…"
+  - "real-time strategy game" to "real-time game"
+  - superlatives such as "first" and "biggest" in the What-I-learned sections
+  - the NBA research question, which is now neutral because I don't know the team's exact question
+  - "reshaping" the data, which your commit didn't do
+  - "listening to music" to just "music"
+- **README:** rewritten with editing, local preview and step-by-step deployment.
+
 ## Next
-Phase 5: QA.
+Phase 6: polish.

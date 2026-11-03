@@ -88,6 +88,28 @@ window.SITE = {
           "A new wave spawns every 30 seconds, with a randomized mix of enemies and difficulty that scales up as the game goes on.",
           "The economy runs on collectable Energy, and power-ups can slow enemies down or speed up defender attacks."
         ],
+        extras: [
+          {
+            type: "diagram",
+            caption: "How the game is organized: two class hierarchies plus the systems that drive them.",
+            groups: [
+              { label: "Aliens (enemy hierarchy)", items: ["Basic Alien", "Dashing Alien", "Stealer Alien"] },
+              { label: "Robots (defender hierarchy)", items: ["Robot Shooter", "Robot Shield", "Robot Mine"] },
+              { label: "Systems", items: ["30-second wave timer", "Energy economy", "Power-ups", "JavaFX game loop"] }
+            ]
+          },
+          {
+            type: "sprites",
+            caption: "More of the game's sprites: Energy, the two power-ups, the Stealer Alien and the Shooter's laser.",
+            images: [
+              { src: "assets/img/pvz/Energy.png", alt: "Energy pickup sprite" },
+              { src: "assets/img/pvz/PowerUpSlowDownEnemy.png", alt: "Slow-down-enemies power-up sprite" },
+              { src: "assets/img/pvz/PowerUpSpeedUpDefenderAttack.png", alt: "Speed-up-defenders power-up sprite" },
+              { src: "assets/img/pvz/enemies/StealerAlien.png", alt: "Stealer Alien sprite" },
+              { src: "assets/img/pvz/projectiles/RobotShooterLaser.png", alt: "Robot Shooter laser sprite" }
+            ]
+          }
+        ],
         techniques: [
           ["Inheritance & polymorphism", "Separate enemy and defender hierarchies, so each alien or robot type is its own subclass."],
           ["Real-time game loop", "JavaFX Canvas driven by an AnimationTimer, coordinating 10+ kinds of interacting objects."],
@@ -125,6 +147,14 @@ window.SITE = {
           "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from 22 ft out to 40+ ft, plus distance-bucket summaries for each player.",
           "My part so far: I reorganized the repo and set up the project's structure. I renamed the loader to `nba_four_point_datasets.py` and created `nba_four_point_graphs.py`, which imports the loaded DataFrame so graphing code stays separate from data loading.",
           "The analysis itself is still in progress with the team."
+        ],
+        extras: [
+          {
+            type: "code",
+            file: "nba_four_point_graphs.py",
+            caption: "The graphing module I set up (the full file as committed). It pulls in the loaded DataFrame from the dataset module so graph code stays separate.",
+            text: "#MAKE GRAPHS HERE\nimport pandas as pd\n#Imports other python file so we can use its variables and functions\nimport nba_four_point_datasets\n#To access these var and functions do file name.variable_name or file name.function_name\nprint(nba_four_point_datasets.df)"
+          }
         ],
         techniques: [
           ["pandas", "Loading and reshaping the shot-distance CSVs."],
@@ -193,6 +223,26 @@ window.SITE = {
           "Waves: 20 basic aliens, then 12 tougher yellow aliens that take two hits and fire back when destroyed, then a mix, then a boss. Beat the boss and the cycle repeats with more aliens each time.",
           "The boss has 150 HP. It tracks a snapshot of your position, pauses, fires fireballs in 8 directions, then starts chasing again.",
           "Four timed power-ups: a healing kit (+50 HP), ice (freezes aliens for 2 s), invisibility (aliens flee for 2 s), and a speed boost (4 s)."
+        ],
+        extras: [
+          {
+            type: "image",
+            src: "assets/img/alien-shooter-boss.webp",
+            alt: "Alien Shooter boss wave: the boss in a space-station room, with pink fireballs flying outward",
+            caption: "Boss wave: the fireballs are mid-burst after the boss reaches your last position."
+          },
+          {
+            type: "code",
+            file: "script.js, line 456",
+            caption: "The boss's attack: remember where the player was, launch all 8 fireballs from the boss, then wait 2.5 seconds before chasing again.",
+            text: "function bossAttack(){\n    tempPlayerLeft = player.left\n    tempPlayerTop = player.top\n    bossSpeed = 6\n    boss.move = false\n    if(boss.vis){\n        for(i=0; i<fireballArray.length; i++){\n            fireballArray[i].left = boss.left\n            fireballArray[i].top = boss.top\n            fireballArray[i].vis = true\n        }\n    }\n    setTimeout(function() {boss.move = true;}, 2500);\n}"
+          },
+          {
+            type: "code",
+            file: "script.js, line 772",
+            caption: "Axis-aligned bounding-box collision, used for every hit in the game.",
+            text: "function collision(first, second) {\n    if (first.left + first.width > second.left &&\n        first.left < second.left + second.width &&\n        first.top + first.height > second.top &&\n        first.top < second.top + second.height) {\n        return true\n    }\n}"
+          }
         ],
         techniques: [
           ["Game loop", "A requestAnimationFrame loop that moves, collides and redraws every entity each frame."],

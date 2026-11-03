@@ -345,6 +345,39 @@
     );
   }
 
+  /* ---------- Extras on project pages: diagrams, code, extra images ---------- */
+  function diagram(v) {
+    return (
+      '<figure class="visual visual-diagram">' +
+      '<div class="diagram">' +
+      v.groups.map(function (g) {
+        return '<div class="dg"><p class="dg-label mono">' + esc(g.label) + "</p><ul>" +
+          g.items.map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</ul></div>";
+      }).join("") +
+      "</div>" +
+      (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
+      "</figure>"
+    );
+  }
+
+  function code(v) {
+    return (
+      '<figure class="visual visual-code">' +
+      '<p class="code-file mono">' + esc(v.file) + "</p>" +
+      '<pre class="code-excerpt" tabindex="0"><code>' + esc(v.text) + "</code></pre>" +
+      (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
+      "</figure>"
+    );
+  }
+
+  function extra(v, prefix) {
+    if (v.type === "diagram") return diagram(v);
+    if (v.type === "code") return code(v);
+    if (v.type === "image") return image(v, prefix);
+    if (v.type === "sprites") return sprites(v, prefix);
+    return "";
+  }
+
   /* ---------- Project page ---------- */
   function projectPage(S, slug) {
     var all = S.projects.filter(function (p) { return p.featured; });
@@ -366,7 +399,9 @@
       '<div class="page-visual">' + visual(S, p, "../", { tall: true }) + "</div>" +
       '<section aria-labelledby="q"><h2 id="q"><span class="sec-num mono">01</span>The question</h2><p>' + inline(g.question) + "</p></section>" +
       '<section aria-labelledby="b"><h2 id="b"><span class="sec-num mono">02</span>What I built</h2><ul class="bullets">' +
-      g.built.map(function (b) { return "<li>" + inline(b) + "</li>"; }).join("") + "</ul></section>" +
+      g.built.map(function (b) { return "<li>" + inline(b) + "</li>"; }).join("") + "</ul>" +
+      (g.extras || []).map(function (x) { return '<div class="extra">' + extra(x, "../") + "</div>"; }).join("") +
+      "</section>" +
       '<section aria-labelledby="t"><h2 id="t"><span class="sec-num mono">03</span>Key techniques</h2><dl class="techniques">' +
       g.techniques.map(function (t) { return "<div><dt>" + esc(t[0]) + "</dt><dd>" + inline(t[1]) + "</dd></div>"; }).join("") +
       "</dl></section>" +

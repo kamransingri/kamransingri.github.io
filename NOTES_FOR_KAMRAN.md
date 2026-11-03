@@ -1,11 +1,11 @@
 # Notes for Kamran
 
-_Last updated: Phase 1 complete._
+_Last updated: Phase 3 complete._
 
 ## Status
 - [x] Phase 1: inventory and project selection
-- [ ] Phase 2: core site
-- [ ] Phase 3: project write-ups and visuals
+- [x] Phase 2: core site
+- [x] Phase 3: project write-ups and visuals
 - [ ] Phase 4: interactivity
 - [ ] Phase 5: QA
 - [ ] Phase 6: polish
@@ -50,5 +50,15 @@ _Last updated: Phase 1 complete._
 - **Business Professionals of America:** competition entries; no leadership or technical depth.
 - **Track & Field:** folded into a one-line activity (recruiting 5+ athletes) and the About text.
 
+## Project pages (Phase 3)
+- **Pages:** `projects/space-tower-defense.html`, `nba-four-point-line.html`, `connect-4-variant.html`, `alien-shooter.html`.
+- **Visuals:**
+  - **Alien Shooter:** two real screenshots, taken by running the game in a headless browser. For the boss shot I skipped to wave 4 from the browser console. There are also two verbatim code excerpts, `bossAttack` and `collision`.
+  - **NBA:** a chart computed from the team's CSVs, plus your `nba_four_point_graphs.py` shown verbatim.
+  - **Tower Defense:** your real sprites, plus a simple diagram of the class hierarchies and game systems. It uses descriptive labels, not your actual class names, which I couldn't see.
+  - **Connect 4:** a labelled illustration of the breadth-first infection. The board layout is made up; the spread logic follows the description of your code.
+- **Please confirm:** every "What I learned" paragraph is my draft based on the code and project facts. Please rewrite them in your own words; they're the most personal part of each page.
+- **Please confirm (Tower Defense & Connect 4):** the pages say "Code isn't public yet." Push those projects to GitHub and add a `links` entry in `content/data.js` to show a code link.
+
 ## Next
-Phase 2: design and build the main page.
+Phase 4: interactivity.

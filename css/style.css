@@ -352,7 +352,17 @@ details.more li { margin-bottom: 0.35rem; }
 .next { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
 .next a { display: inline-flex; flex-direction: column; gap: 0.2rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; }
 .next .small { color: var(--muted); font-weight: 400; }
-.code-excerpt { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.55; }
+.extra { margin-top: 1.75rem; }
+.code-file { font-size: 0.75rem; color: var(--muted); margin: 0 0 0.35rem; }
+.diagram { display: grid; gap: 0.75rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem; }
+@media (min-width: 560px) { .diagram { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.dg { border-left: 2px solid var(--accent); padding-left: 0.75rem; }
+.dg-label { font-size: 0.72rem; color: var(--muted); margin: 0 0 0.4rem; }
+.dg ul { list-style: none; }
+.dg li { font-size: 0.95rem; padding: 0.15rem 0; }
+.dg li::before { content: "├ "; font-family: var(--mono); color: var(--tick); }
+.dg li:last-child::before { content: "└ "; }
+.code-excerpt { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.55; }
 .code-excerpt code { background: none; padding: 0; font-size: inherit; }
 
 /* ---------- Motion ---------- */

@@ -52,3 +52,13 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
   - Every point has a `<title>`, and a "Show the numbers" table backs it up.
 - **The Connect 4 visual** is a labelled illustration of the breadth-first capture (the code isn't available to screenshot).
 - **Removed:** the unused Battle Game sprites (`assets/img/battle/`). Kamran had already pulled that project from the site.
+
+## Polish: a fifth write-up page? No.
+- **Bus Reliability Tracker** only has config loading and logging (124 lines). A full page would mostly describe plans, so it stays as a compact "in progress" entry.
+- **Civ Tycoon and Sports Team Sim** would be written entirely from the old site's second-hand summary, because their code isn't reachable from this session. That isn't enough to ground "how I built it" and "key techniques" sections.
+- **Revisit** once the bus collector exists. That project is the strongest future data-science write-up, with real delay data and a chart. Or revisit if Civ Tycoon's code goes on GitHub.
+
+## Polish: print, OG, 404
+- **Print stylesheet:** prints like a resume. Navigation, filters, visuals and buttons are hidden; external URLs are printed; "More detail" entries open for printing; entries don't split across pages.
+- **OG image:** the name and one-liner, plus a small line chart drawn from the same real NBA numbers as the site chart.
+- **404 page:** uses root-absolute paths, because GitHub Pages serves `404.html` at whatever path was requested.

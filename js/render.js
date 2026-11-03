@@ -410,7 +410,7 @@
       (links ? '<ul class="link-row">' + links + "</ul>" : "") +
       (g.note ? '<p class="muted">' + inline(g.note) + "</p>" : "") +
       "</section>" +
-      '<nav class="next" aria-label="Next project"><a href="' + next.slug + '.html"><span class="mono small">Next project</span> ' + esc(next.title) + ' <span aria-hidden="true">→</span></a></nav>'
+      '<nav class="next" aria-label="Next project"><a href="' + next.slug + '.html"><span class="mono small">Next project</span> <span>' + esc(next.title) + ' <span aria-hidden="true">→</span></span></a></nav>'
     );
   }
 

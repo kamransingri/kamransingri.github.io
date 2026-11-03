@@ -27,23 +27,11 @@ _Final: all six phases done._
   - Images shrank the site from 5.0 MB to 1.7 MB.
 - **Docs:** `README.md` covers how to edit, preview and deploy. `content/inventory.md` lists every fact with its source. `content/projects-ranking.md` has the project scoring.
 
-## The work isn't pushed yet: please do this
-This cloud session wasn't allowed push access to your repo; the request was blocked by the session's permission settings. All work is committed locally on `site-redesign`, and I sent you two files in the chat:
-- **`kamransingri-site-redesign.bundle`**, a git bundle of the branch with full history. In your local clone of `kamransingri.github.io`:
-  ```bash
-  git fetch /path/to/kamransingri-site-redesign.bundle site-redesign:site-redesign
-  git push -u origin site-redesign
-  ```
-- **`kamransingri-site.zip`**, a plain copy of the site files, if you'd rather upload them directly.
-
-## Deployment steps
-1. Push `site-redesign` (above), then open a pull request into `main` on GitHub and review it.
-2. Merge it.
-3. **Settings → Pages → Source:** "Deploy from a branch", **Branch:** `main` / `(root)`, **Save** (skip if already set).
-4. Wait about a minute, then open https://kamransingri.github.io. Click the GitHub and LinkedIn links once; this sandbox couldn't reach those sites to check them.
-5. Optional: paste the URL into LinkedIn's Post Inspector to check the preview card.
-
-More detail is in `README.md`.
+## Deployment: done
+- **Live:** https://kamransingri.github.io
+- **Merged** through [kamransingri/kamransingri.github.io#1](https://github.com/kamransingri/kamransingri.github.io/pull/1), and GitHub Pages built and deployed it successfully.
+- **To change the site later:** edit `content/data.js`, optionally run `node tools/prerender.mjs`, then commit and push to `main`. Pages redeploys in about a minute (see `README.md`).
+- **Check once in a browser:** click the GitHub and LinkedIn links. This session's network couldn't reach those sites, or the live site itself.
 
 ## Please confirm
 1. **Java project facts (Tower Defense, Connect 4, Civ Tycoon, Sports Sim):**

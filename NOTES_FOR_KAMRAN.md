@@ -1,12 +1,12 @@
 # Notes for Kamran
 
-_Last updated: Phase 3 complete._
+_Last updated: Phase 4 complete._
 
 ## Status
 - [x] Phase 1: inventory and project selection
 - [x] Phase 2: core site
 - [x] Phase 3: project write-ups and visuals
-- [ ] Phase 4: interactivity
+- [x] Phase 4: interactivity
 - [ ] Phase 5: QA
 - [ ] Phase 6: polish
 
@@ -60,5 +60,16 @@ _Last updated: Phase 3 complete._
 - **Please confirm:** every "What I learned" paragraph is my draft based on the code and project facts. Please rewrite them in your own words; they're the most personal part of each page.
 - **Please confirm (Tower Defense & Connect 4):** the pages say "Code isn't public yet." Push those projects to GitHub and add a `links` entry in `content/data.js` to show a code link.
 
+## Interactivity (Phase 4)
+All of these were tested in headless Chromium, with no console errors:
+- **Sticky nav** marks the section in view (`aria-current`).
+- **Project filter** uses tags from `data.js` (Java, Games, Python, Data, JavaScript) and shows a "2 of 7 shown" count.
+- **Experience entries** expand with native `<details>`, so they work with keyboard and without JS.
+- **Copy-email button** says "Copied" for 2 s. It falls back to `execCommand`, then a "Press Ctrl+C" hint.
+- **Light/dark toggle** follows the system theme until you click it; the choice is saved to localStorage, wrapped in try/catch.
+- **Chart tooltips** work on hover, tap and keyboard. The chart is one tab stop, arrow keys move between points, and Escape closes the tooltip.
+- **JS off:** all content is still there (prerendered), and the JS-only controls stay hidden.
+- **Reduced motion:** with `prefers-reduced-motion`, smooth scrolling and any transitions are off.
+
 ## Next
-Phase 4: interactivity.
+Phase 5: QA.

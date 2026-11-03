@@ -182,7 +182,7 @@
     var dots = rows.map(function (r, i) {
       var pct = (r.made / r.att * 100).toFixed(1);
       var label = r.ft + " ft: " + pct + "% (" + r.made.toLocaleString("en-US") + " of " + r.att.toLocaleString("en-US") + ")";
-      return '<g class="pt" tabindex="0" role="listitem" aria-label="' + label + '" data-tip="' + label + '">' +
+      return '<g class="pt" tabindex="' + (i === 0 ? 0 : -1) + '" role="listitem" aria-label="' + label + '" data-tip="' + label + '">' +
         '<circle class="hit" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="14"/>' +
         '<circle class="dot" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="4.5"/>' +
         "<title>" + label + "</title></g>";

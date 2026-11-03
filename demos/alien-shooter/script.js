@@ -708,9 +708,11 @@ function moveBadLaser(){
             health -= 10
             healthBarArray.splice(healthBarArray.length-1,1)
             rectx -= 15
+            continue // laser removed; skip the rest (portfolio fix: avoids reading a missing element)
         }
         if(oppsLaserArray[i].left > 1500 || oppsLaserArray[i].left < 0){
             oppsLaserArray.splice(i,1)
+            continue
         }
         if(oppsLaserArray.length>=1){
             ctx.drawImage(oppsLaserArray[i], oppsLaserArray[i].left, oppsLaserArray[i].top, oppsLaserArray[i].width, oppsLaserArray[i].height)

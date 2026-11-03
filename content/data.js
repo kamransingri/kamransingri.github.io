@@ -268,19 +268,6 @@ window.SITE = {
       links: []
     },
     {
-      slug: "bus-reliability-tracker",
-      title: "Bus Reliability Tracker",
-      featured: false,
-      status: "In progress",
-      summary:
-        "Early-stage Python project that will collect Champaign-Urbana MTD real-time bus data and measure how reliable each route actually is.",
-      details:
-        "Phase 1 of 5 (the skeleton) is in place: config loading that reports every problem at once and rejects placeholder values, UTC rotating-file logs, pytest tests, and ruff + pytest in GitHub Actions CI. Next: the GTFS-Realtime feed collector.",
-      tags: ["Python", "Data"],
-      stack: ["Python", "pytest", "GitHub Actions"],
-      links: []
-    },
-    {
       slug: "sports-team-sim",
       title: "Sports Team Sim",
       featured: false,

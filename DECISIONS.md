@@ -62,3 +62,7 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
 - **Print stylesheet:** prints like a resume. Navigation, filters, visuals and buttons are hidden; external URLs are printed; "More detail" entries open for printing; entries don't split across pages.
 - **OG image:** the name and one-liner, plus a small line chart drawn from the same real NBA numbers as the site chart.
 - **404 page:** uses root-absolute paths, because GitHub Pages serves `404.html` at whatever path was requested.
+
+## Follow-up: Kamran's note on incomplete GitHub projects
+- **Bus Reliability Tracker removed** from Other projects. It's a phase-1 skeleton with nothing to show yet; the About text still mentions it as just started.
+- **NBA Four-Point Line kept.** It has real data and a real chart, and its "in progress" label and narrow role description are honest.

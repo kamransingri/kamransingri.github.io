@@ -81,10 +81,10 @@ More detail is in `README.md`.
     - the "Coordinates:" debug line
     - boss fireballs moving faster than intended
     - click-aim ignoring the canvas position
-14. **Bus Reliability Tracker:**
-    - It's described as "in progress, phase 1 of 5", without a link, because the repo is private.
+14. **Bus Reliability Tracker:** removed from the project list after your note that most GitHub projects are incomplete. It's only the phase-1 skeleton (config and logging), so there's nothing to show yet. The About section still mentions you've started it.
     - Its LICENSE still says "YOUR NAME HERE".
     - Five of its six declared dependencies aren't used yet.
+16. **OneDrive projects folder:** the shared link couldn't be opened because this session's network policy blocks `1drv.ms`. Those projects haven't been reviewed yet.
 15. **"Fall 2026" for the Data Science Club:** inferred from the repo's October 2026 commits.
 
 ## Security scan
@@ -96,7 +96,7 @@ More detail is in `README.md`.
 ## Decisions worth knowing
 Full list in `DECISIONS.md`.
 - **Featured:** Tower Defense, NBA Four-Point Line, Connect 4, Alien Shooter.
-- **Other:** Civ Tycoon, Bus Tracker, Sports Sim.
+- **Other:** Civ Tycoon, Sports Sim. The Bus Tracker was removed: too early to show.
 - **Excluded:** API_Autopilot, the empty repos, and Battle/Nerdle/Word Search, which you'd removed before.
 - **High-school items kept:** CS Kids, Math Tutoring, Kids Against Hunger. Track is now one line. BPA is cut.
 - **No fifth write-up page:** nothing left was strong or first-hand enough. The Bus Tracker is the best candidate once it collects real data.

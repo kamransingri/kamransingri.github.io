@@ -372,3 +372,39 @@ details.more li { margin-bottom: 0.35rem; }
 
 /* Sprites were drawn for a light background, so keep their tray light in both themes. */
 .visual-sprites .sprite-row { background: #efebe3; border-color: var(--rule); }
+
+/* ---------- Print: a clean, resume-like printout ---------- */
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #fff; --surface: #fff; --text: #000; --muted: #333; --rule: #bbb; --tick: #888; --accent: #000; --accent-ink: #fff;
+  }
+  @page { margin: 1.6cm 1.8cm; }
+  html { scroll-padding-top: 0; }
+  body { font-size: 10.5pt; line-height: 1.45; background: #fff; color: #000; }
+  .site-nav, .skip, .theme-toggle, .filters, .copy, .copied, .data-table, .project-visual,
+  .project-links, .site-footer p:last-child, .link-row.plain, details.more summary { display: none !important; }
+  .intro { padding: 0 0 0.5cm; }
+  .intro h1 { font-size: 26pt; margin-bottom: 0.2cm; }
+  .lede { font-size: 11.5pt; }
+  .kicker { margin-bottom: 0.2cm; }
+  .link-row { margin-top: 0.3cm; gap: 0.3cm 0.6cm; }
+  .btn, .btn-primary { border: 0; padding: 0; min-height: 0; background: none; color: #000; font-size: 9pt; }
+  .btn[href^="http"]::after { content: " " attr(href); color: #333; }
+  h1, h2, h3, .sec-num { break-after: avoid; page-break-after: avoid; }
+  .section { padding-top: 0.5cm; }
+  .section > .wrap::before { height: 6px; margin-bottom: 0.3cm; }
+  .section h2 { font-size: 14pt; margin-bottom: 0.3cm; }
+  .project { display: block; padding: 0.3cm 0; break-inside: avoid; }
+  .project h3 { font-size: 12pt; margin-bottom: 0.1cm; }
+  .project h3 a::after { content: " (kamransingri.github.io/" attr(href) ")"; font-family: var(--mono); font-size: 8pt; font-weight: 400; color: #333; }
+  .tags { margin: 0.1cm 0 0; }
+  .others { display: block; }
+  .other, .other:first-child { padding: 0.25cm 0; border-top: 1px solid #ddd; break-inside: avoid; }
+  .tl-item, .edu li, .acts li { break-inside: avoid; padding-bottom: 0.3cm; }
+  details.more > ul { display: block; }
+  .h-sub { margin-top: 0.5cm; }
+  .email { border: 0; color: #000; }
+  .contact { padding-bottom: 0; }
+  a { text-decoration: none; }
+  .page-visual, .extra .visual-image, .extra .visual-sprites, .crumb, .next { display: none !important; }
+}

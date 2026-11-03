@@ -199,3 +199,14 @@
     document.addEventListener("chart:drawn", hide);
   });
 })();
+
+/* Print: open every "More detail" so the printout has the full experience entries. */
+(function () {
+  "use strict";
+  var opened = [];
+  window.addEventListener("beforeprint", function () {
+    opened = Array.prototype.filter.call(document.querySelectorAll("details.more"), function (d) { return !d.open; });
+    opened.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener("afterprint", function () { opened.forEach(function (d) { d.open = false; }); opened = []; });
+})();

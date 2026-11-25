@@ -272,6 +272,7 @@ details.more li { margin-bottom: 0.35rem; }
 .cell.inf { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 /* Chart */
+.chart-takeaway { font-weight: 600; font-size: 1.05rem; line-height: 1.35; margin: 0 0 0.6rem; }
 .chart-wrap { position: relative; padding: 0.5rem 0.25rem 0.25rem; }
 .chart { width: 100%; height: auto; overflow: visible; font-family: var(--mono); }
 .chart-wrap .chart { max-width: none; }

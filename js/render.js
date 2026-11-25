@@ -153,7 +153,7 @@
     }
     return (
       '<figure class="visual visual-board">' +
-      '<div class="board" role="img" aria-label="Illustration: the infector piece lands on a Connect 4 board and captures connected opponent pieces outward, one generation at a time.">' +
+      '<div class="board" role="img" aria-label="Illustration: the infector piece lands on a Connect 4 board and takes over touching opponent pieces outward, one step at a time.">' +
       cells + "</div>" +
       (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
       "</figure>"
@@ -219,6 +219,7 @@
     var c = chart(S, opts);
     return (
       '<figure class="visual visual-chart">' +
+      (v.takeaway ? '<p class="chart-takeaway">' + inline(v.takeaway) + "</p>" : "") +
       '<div class="chart-wrap" data-chart>' + c.svg + '<div class="tip" role="status" aria-live="polite" hidden></div></div>' +
       (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
       c.table +

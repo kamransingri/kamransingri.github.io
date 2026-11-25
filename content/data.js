@@ -13,7 +13,7 @@ window.SITE = {
     // Short facts shown right under the name, in this order.
     credentials: ["Statistics & CS at UIUC", "Class of 2029", "James Scholar", "GPA 4.0"],
     intro:
-      "I'm a first-year at the University of Illinois Urbana-Champaign. I'm most comfortable in Python and Java, I'm most interested in data science, and I'm open to software engineering roles too.",
+      "I'm a first-year drawn to data science. Right now I'm working out where an NBA four-point line should sit with my Data Science Club team, and building Simmer, a recipe and nutrition web app. Before that, I built games and simulations in Java.",
     // The ask, shown in the hero under the intro.
     seeking: "Looking for data science and software engineering internships.",
     email: "kamransingri@gmail.com",
@@ -25,7 +25,7 @@ window.SITE = {
   },
 
   about: [
-    "I study Statistics & Computer Science at UIUC as part of the James Scholar Honors Program. A lot of what I've built so far is in Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data. This semester I'm on a Data Science Club team working out where an NBA four-point line should sit, and on my own I'm building Simmer, a recipe and nutrition web app in TypeScript. I've also started a project tracking how reliable Champaign's buses actually are.",
+    "I study Statistics & Computer Science at UIUC in the James Scholar Honors Program. A lot of what I've built so far is in Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data, and both of my current projects lean on it: the NBA analysis, and the nutrition matching behind Simmer, which I'm writing in TypeScript. I've also started a project tracking how reliable Champaign's buses actually are.",
     "Before college I mentored elementary schoolers through Computer Science Kids, tutored high school students in math, and ran track. I've also packed meals with Kids Against Hunger since 2016. Away from the keyboard, most of my free time goes to sports, music, the gym and cooking."
   ],
 
@@ -69,7 +69,7 @@ window.SITE = {
       summary:
         "A lane-based tower defense game in Java. Robot defenders hold off waves of alien invaders.",
       tags: ["Java", "Games"],
-      stack: ["Java", "JavaFX", "OOP"],
+      stack: ["Java", "JavaFX", "Object-oriented design"],
       links: [],
       visual: {
         type: "sprites",
@@ -139,8 +139,9 @@ window.SITE = {
       ],
       visual: {
         type: "chart",
+        takeaway: "Three-point accuracy falls from 42.4% at 23 feet to 28.5% at 31 feet.",
         caption:
-          "3-point percentage by shot distance, top-50 3PM shooters per season, 2021-22 to 2025-26. I computed it from the team's dataset for this site; it isn't a team result.",
+          "Three-point percentage by shot distance for each season's 50 players with the most made threes, 2021-22 to 2025-26. The 22 ft point is mostly corner threes, which sit closer than the arc. I computed this from the team's dataset for the site; it isn't a team result.",
         source: "nba"
       },
       page: {
@@ -169,7 +170,7 @@ window.SITE = {
           ["Git with a team", "Working in a shared repo in the club's GitHub organization."]
         ],
         learned:
-          "So far, mostly how to work in a shared repo: with loading and graphing in separate files, teammates can work in parallel. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
+          "On a team of five, splitting the work cleanly matters: separate files for loading and graphing let us work in parallel, and agreeing on exactly what the simulation should model let a teammate build it. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
         note: ""
       }
     },
@@ -185,7 +186,7 @@ window.SITE = {
       visual: {
         type: "board",
         caption:
-          "Illustration, not a screenshot: the infector (●) lands and captures connected opponent pieces breadth-first. Numbers are generations; the real piece stops at 20 tiles. Dark pieces are the player's own."
+          "Illustration, not a screenshot. The infector (●) lands and takes over touching opponent pieces breadth-first: each number is the step a piece was captured on. The real piece stops after 20 tiles. Dark pieces are the player's own."
       },
       page: {
         question:
@@ -193,16 +194,16 @@ window.SITE = {
         built: [
           "Classic Connect 4, plus an in-game currency and a shop.",
           "Four special pieces, each with its own logic: a bomb, a shrapnel bomb, a line-clearer, and an infector.",
-          "The infector spreads to neighboring opponent tiles one generation at a time (breadth-first), capped at 20 tiles.",
+          "The infector spreads to neighboring opponent tiles one step at a time (breadth-first), capped at 20 tiles.",
           "Each piece type is its own class, so adding a new piece doesn't touch the core game logic."
         ],
         techniques: [
-          ["Breadth-first spread", "The infection expands one generation at a time from where it lands, up to 20 tiles."],
+          ["Breadth-first spread", "The infection expands one step at a time from where it lands, up to 20 tiles."],
           ["Modular piece classes", "Special pieces plug into the board without changes to the core turn logic."],
           ["JavaFX animation", "Timed effects and animations driven by an AnimationTimer."]
         ],
         learned:
-          "The infection piece is where breadth-first search stopped being abstract for me: handle one generation, then the next, and stop at a cap. Keeping every special piece in its own class also made the shop easy to extend.",
+          "The infection piece is where breadth-first search stopped being abstract for me: handle one step, then the next, and stop at a cap. Keeping every special piece in its own class also made the shop easy to extend.",
         note: "Code isn't public yet."
       }
     },

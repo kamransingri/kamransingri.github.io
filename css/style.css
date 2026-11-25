@@ -396,9 +396,13 @@ details.more li { margin-bottom: 0.35rem; }
 .dg-label { font-size: 0.72rem; color: var(--muted); margin: 0 0 0.4rem; }
 .dg ul { list-style: none; }
 .dg li { font-size: 0.95rem; padding: 0.15rem 0; }
-/* In a homepage project card the diagram has about a third of the room it has on its own page */
-.project-visual .diagram { gap: 0.75rem 1rem; }
+/* In a homepage project card the diagram gets columns by the card's own width, not the
+   viewport's: three when they fit unwrapped, two on narrow cards, one on the smallest. */
+.project-visual { container-type: inline-size; }
+.project-visual .diagram { gap: 0.75rem 1rem; grid-template-columns: minmax(0, 1fr); }
 .project-visual .dg li { font-size: 0.875rem; white-space: nowrap; }
+@container (min-width: 23rem) { .project-visual .diagram { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (min-width: 33rem) { .project-visual .diagram { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .dg li::before { content: "├ "; font-family: var(--mono); color: var(--tick); }
 .dg li:last-child::before { content: "└ "; }
 .code-excerpt { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.55; }

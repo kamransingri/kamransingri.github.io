@@ -11,7 +11,7 @@ window.SITE = {
     name: "Kamran Singri",
     initials: "KS",
     // Short facts shown right under the name, in this order.
-    credentials: ["Statistics & CS at UIUC", "Class of 2029", "James Scholar", "GPA 4.0"],
+    credentials: ["Statistics & CS at UIUC", "Class of 2029", "James Scholar Honors", "GPA 4.0"],
     intro:
       "I'm a first-year drawn to data science. Right now I'm working out where an NBA four-point line should sit with my Data Science Club team, and building Simmer, a recipe and nutrition web app. Before that, I built games and simulations in Java.",
     // The ask, shown in the hero under the intro.
@@ -61,7 +61,7 @@ window.SITE = {
   ],
 
   /* Projects, in display order. featured: true → big entry on the homepage. A page: {...} block → its own write-up at projects/<slug>.html (featured or not).
-     tags drive the filter buttons. visual.type: "sprites" | "chart" | "board" | "image" */
+     tags are metadata only. visual.type: "sprites" | "chart" | "board" | "image" | "diagram" */
   projects: [
     {
       slug: "nba-four-point-line",
@@ -71,32 +71,32 @@ window.SITE = {
       summary:
         "A Data Science Club team of five using multi-season NBA shooting data to find where a four-point line should sit, and how it would change player performance and style of play.",
       tags: ["Python", "Data"],
-      stack: ["Python", "pandas", "Team project"],
+      stack: ["Python", "pandas"],
       context: "UIUC Data Science Club · team of 5 · Aug 2026 – present",
       links: [
         { label: "Team repo", href: "https://github.com/UIUC-DSC/team-Starting-Five-Minus-One" }
       ],
       visual: {
         type: "chart",
-        takeaway: "Three-point accuracy falls from 42.4% at 23 feet to 28.5% at 31 feet.",
+        // The trend over the well-sampled range; the two labeled points on the chart match it.
+        takeaway: "From 24 to 30 feet, three-point accuracy falls from 39.7% to 31.0%.",
         caption:
-          "Three-point percentage by shot distance for each season's 50 players with the most made threes, 2021-22 to 2025-26. The 22 ft point is mostly corner threes, which sit closer than the arc. Bars show 95% confidence intervals, which widen past 30 feet where there are fewer shots. I computed this from the team's dataset for the site; it isn't a team result.",
+          "Each season's 50 players with the most made threes, 2021-22 to 2025-26. Bars are 95% confidence intervals; they widen where there are fewer shots. The 22 ft point is mostly corner threes. I computed this from the team's dataset; it isn't a team result.",
         source: "nba"
       },
       page: {
         question:
           "What could a four-point line look like in the NBA? Our team in UIUC's Data Science Club is exploring that with real shooting data.",
         built: [
-          "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from the arc out to 40+ ft, plus distance-bucket summaries for each player.",
-          "I built an EPA-by-shot-distance analysis that weighs a shot's point value against its distance. We used it to pick a candidate line placement that preserves the value of the three-pointer.",
+          "I built an expected-points (EPA) analysis by shot distance that weighs a shot's point value against its distance. We used it to pick a candidate line placement that preserves the value of the three-pointer.",
           "I helped define what our Monte Carlo simulation would model (a teammate implemented it). The simulation is validated by backtesting on the 2024-25 and 2025-26 seasons.",
+          "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from the arc out to 40+ ft, plus distance-bucket summaries for each player.",
           "Early on, I reorganized the repo so data loading (`nba_four_point_datasets.py`) and graphing (`nba_four_point_graphs.py`) live in separate modules.",
           "Now I'm helping build the presentation of our findings for the club board."
         ],
         techniques: [
           ["EPA by shot distance", "Weighing each shot's point value against its distance to find where a four-point line would keep the three-pointer worth taking."],
-          ["Monte Carlo simulation", "Helped scope what the team's simulation models, and its backtest on the 2024-25 and 2025-26 seasons."],
-          ["pandas", "Loading the shot-distance CSVs into DataFrames."]
+          ["Monte Carlo simulation", "Helped scope what the team's simulation models, and its backtest on the 2024-25 and 2025-26 seasons."]
         ],
         learned:
           "On a team of five, splitting the work cleanly matters: separate files for loading and graphing let us work in parallel, and agreeing on exactly what the simulation should model let a teammate build it. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
@@ -364,6 +364,7 @@ window.SITE = {
       xLabel: "Shot distance (ft)",
       yLabel: "3-point %",
       line: 0.4, // reference line drawn at 40%
+      labelFt: [24, 30], // points labeled on the chart; keep these matching the takeaway
       rows: [
         { ft: 22, made: 2990, att: 7101 },
         { ft: 23, made: 5639, att: 13307 },

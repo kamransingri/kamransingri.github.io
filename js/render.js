@@ -196,9 +196,16 @@
         "<title>" + label + "</title></g>";
     }).join("");
     var first = rows[0], last = rows[rows.length - 1];
-    var direct =
-      '<text class="direct" x="' + (pts[0][0] + 8).toFixed(1) + '" y="' + (pts[0][1] - 10).toFixed(1) + '">' + (first.made / first.att * 100).toFixed(1) + "%</text>" +
-      '<text class="direct" x="' + (pts[pts.length - 1][0] - 4).toFixed(1) + '" y="' + (pts[pts.length - 1][1] + 20).toFixed(1) + '" text-anchor="end">' + (last.made / last.att * 100).toFixed(1) + "%</text>";
+    // Label only the points the takeaway names. The first sits above-right of its dot; the last
+    // sits below-left, where the falling line leaves room and it can't touch the next point's bar.
+    var labels = C.labelFt || [];
+    var direct = rows.map(function (r, i) {
+      var k = labels.indexOf(r.ft);
+      if (k < 0) return "";
+      var last = k === labels.length - 1 && labels.length > 1;
+      return '<text class="direct" x="' + (pts[i][0] + (last ? -7 : 7)).toFixed(1) + '" y="' + (pts[i][1] + (last ? 17 : -9)).toFixed(1) + '"' +
+        (last ? ' text-anchor="end"' : "") + ">" + (r.made / r.att * 100).toFixed(1) + "%</text>";
+    }).join("");
     var svg =
       '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-labelledby="nba-chart-title">' +
       '<title id="nba-chart-title">3-point percentage by shot distance, ' + first.ft + " to " + last.ft + " feet</title>" +
@@ -397,6 +404,7 @@
       (p.context ? '<p class="page-meta mono">' + esc(p.context) + "</p>" : "") +
       '<p class="lede">' + inline(p.summary) + "</p>" +
       tagList(p) +
+      (links ? '<ul class="link-row page-links">' + links + "</ul>" : "") +
       (g.note ? '<p class="code-note mono">' + inline(g.note) + "</p>" : "") +
       "</header>" +
       '<div class="page-visual">' + visual(S, p, "../", { tall: true }) + "</div>" +
@@ -409,9 +417,13 @@
       g.techniques.map(function (t) { return "<div><dt>" + esc(t[0]) + "</dt><dd>" + inline(t[1]) + "</dd></div>"; }).join("") +
       "</dl></section>" +
       '<section aria-labelledby="l"><h2 id="l"><span class="sec-num mono">04</span>What I learned</h2><p>' + inline(g.learned) + "</p></section>" +
-      (links
-        ? '<section aria-labelledby="k"><h2 id="k"><span class="sec-num mono">05</span>Links</h2><ul class="link-row">' + links + "</ul></section>"
-        : "") +
+      // Close the page with the ask, so a convinced reader doesn't have to go back to the homepage
+      '<aside class="page-cta" aria-label="Contact">' +
+      (S.person.seeking ? '<p class="seeking">' + inline(S.person.seeking) + "</p>" : "") +
+      '<ul class="link-row">' +
+      '<li><a class="btn btn-primary" href="' + esc(url(S.person.resume, "../")) + '">Resume <span class="mono small">PDF</span></a></li>' +
+      '<li><a class="btn" href="mailto:' + esc(S.person.email) + '">Email</a></li>' +
+      "</ul></aside>" +
       '<nav class="next" aria-label="Next project"><a href="' + next.slug + '.html"><span class="mono small">Next project</span> <span>' + esc(next.title) + ' <span aria-hidden="true">→</span></span></a></nav>'
     );
   }

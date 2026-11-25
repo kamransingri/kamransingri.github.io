@@ -260,7 +260,7 @@ details.more li { margin-bottom: 0.35rem; }
 .project-links a:hover { text-decoration: underline; }
 
 .visual { margin: 0; }
-.visual figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.45; }
+.visual figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.45; max-width: 72ch; }
 .visual-sprites .sprite-row, .visual-image img, .chart-wrap, .board {
   background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
 }
@@ -365,6 +365,11 @@ details.more li { margin-bottom: 0.35rem; }
 .page-meta { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.25rem; }
 .page-head .lede { margin-bottom: 0.75rem; }
 .code-note { font-size: 0.8rem; color: var(--muted); margin: 0.25rem 0 0; }
+.page-links { margin-top: 1rem; }
+/* The ask at the end of every write-up */
+.page-cta { margin-top: 3.5rem; padding-top: 1.75rem; border-top: 1px solid var(--rule); }
+.page-cta .link-row { margin-top: 1.25rem; }
+.page-cta + .next { margin-top: 2.25rem; }
 .page-visual { margin: 2rem 0 0.5rem; }
 .page section { margin-top: 2.75rem; }
 .page section::before {
@@ -463,7 +468,7 @@ details.more li { margin-bottom: 0.35rem; }
   .email { border: 0; color: #000; }
   .contact { padding-bottom: 0; }
   a { text-decoration: none; }
-  .page-visual, .extra .visual-image, .extra .visual-sprites, .crumb, .next { display: none !important; }
+  .page-visual, .extra .visual-image, .extra .visual-sprites, .crumb, .next, .page-cta { display: none !important; }
 }
 
 /* ---------- Small details: 404, focus, anchors ---------- */

@@ -87,3 +87,12 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
 - **NBA chart:** "3-point %" y-axis label, and 95% confidence-interval bars (normal approximation), also in the tooltip and the numbers table.
 - **Dark mode sprite tray:** still light (the dark sprites vanish on a dark ground), but dimmed to `#c9c3b8` via `--sprite-tray`.
 - **Small finish:** `text-wrap: pretty`/`balance`, themed text selection and scrollbars, tabular numbers in the data table. The project title isn't its own tab stop ("Read the write-up" is).
+
+## Fixes from the second critique (22/32)
+- **Order:** NBA leads the featured projects, then Alien Shooter, Space Tower Defense and Simmer. Connect 4 moved to Other projects but keeps its write-up; write-ups now come from a `page` block, not `featured`.
+- **Simmer** is featured as a text-only card until it has a screenshot and a write-up (Kamran's call).
+- **Chart headline** states the well-sampled trend (24 to 30 ft: 39.7% to 31.0%), not peak-to-trough. The two labeled points match it (`charts.nba.labelFt`).
+- **Write-ups** end with the internship ask plus Resume and Email. Their links sit under the tags, and their nav and footer match the homepage.
+- **Diagram card** picks 1–3 columns by its own width (container query). This fixes overflow at 880–1,100px.
+- **Connect 4 caption** describes pieces as solid grey vs outlined, which is true in both themes.
+- **One layout for dated entries** (Experience matches Activities and Education). Skills are split into Data and Tools. The chart shows a keyboard hint once focused.

@@ -215,10 +215,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .prose p { max-width: var(--measure); }
 
 /* ---------- Timeline (vertical axis with ticks) ---------- */
-.timeline { list-style: none; position: relative; padding-left: 1.5rem; border-left: 1px solid var(--rule); }
-.tl-item { position: relative; padding-bottom: 2.25rem; }
-.tl-item:last-child { padding-bottom: 0.25rem; }
-.tl-item::before { content: ""; position: absolute; left: -1.5rem; top: 0.75rem; width: 0.9rem; height: 1px; background: var(--tick); }
+/* Experience shares the date-column layout used by Activities and Education (below) */
 .tl-when { font-size: 0.8rem; color: var(--muted); margin: 0 0 0.25rem; }
 .tl-body h3, .acts h4, .edu h3 { font-size: 1.2rem; margin-bottom: 0.15rem; }
 .at { font-weight: 400; color: var(--muted); }
@@ -279,6 +276,9 @@ details.more li { margin-bottom: 0.35rem; }
 .cell.inf { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 /* Chart */
+/* Keyboard hint, shown only once focus is inside the chart (that is when it is needed) */
+.chart-hint { display: none; font-size: 0.75rem; color: var(--muted); margin: 0.4rem 0 0; }
+.chart-wrap:focus-within + .chart-hint { display: block; }
 .chart-takeaway { font-weight: 600; font-size: 1.05rem; line-height: 1.35; margin: 0 0 0.6rem; }
 .chart-wrap { position: relative; padding: 0.5rem 0.25rem 0.25rem; }
 .chart { width: 100%; height: auto; overflow: visible; font-family: var(--mono); }
@@ -323,11 +323,11 @@ details.more li { margin-bottom: 0.35rem; }
 }
 
 /* ---------- Education, skills, activities ---------- */
-.edu, .acts { list-style: none; display: grid; gap: 1.75rem; }
-.edu li, .acts li { display: grid; gap: 0.15rem; }
+.timeline, .edu, .acts { list-style: none; display: grid; gap: 1.75rem; }
+.tl-item, .edu li, .acts li { display: grid; gap: 0.15rem; }
 @media (min-width: 640px) {
-  .edu li, .acts li { grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1.25rem; }
-  .edu .tl-when, .acts .tl-when { padding-top: 0.3rem; }
+  .tl-item, .edu li, .acts li { grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1.25rem; }
+  .tl-item .tl-when, .edu .tl-when, .acts .tl-when { padding-top: 0.3rem; }
 }
 .edu .muted { margin-bottom: 0.2rem; font-size: 1rem; }
 .acts p { margin-bottom: 0; }

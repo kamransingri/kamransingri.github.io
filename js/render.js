@@ -232,6 +232,7 @@
       '<figure class="visual visual-chart">' +
       (v.takeaway ? '<p class="chart-takeaway">' + inline(v.takeaway) + "</p>" : "") +
       '<div class="chart-wrap" data-chart>' + c.svg + '<div class="tip" role="status" aria-live="polite" hidden></div></div>' +
+      '<p class="chart-hint mono">← and → move between points. Esc hides the label.</p>' +
       (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
       c.table +
       "</figure>"

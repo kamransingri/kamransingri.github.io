@@ -319,7 +319,8 @@ window.SITE = {
 
   skills: [
     ["Languages", "Python, Java, TypeScript, JavaScript"],
-    ["Data & tools", "pandas, NumPy, Matplotlib, Jupyter, JavaFX, HTML/CSS, Git & GitHub, VS Code, pytest, Excel, Google Sheets"],
+    ["Data", "pandas, NumPy, Matplotlib, Jupyter, Excel, Google Sheets"],
+    ["Tools", "Git & GitHub, VS Code, JavaFX, HTML/CSS, pytest"],
     ["Spoken", "English, Spanish (bilingual proficiency; State Seal of Biliteracy)"]
   ],
 

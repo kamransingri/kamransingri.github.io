@@ -2,3 +2,7 @@
 Thumbs.db
 *.log
 .vscode/
+
+# Local tooling (not part of the site)
+.claude/
+.impeccable/

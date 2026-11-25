@@ -10,9 +10,12 @@ window.SITE = {
   person: {
     name: "Kamran Singri",
     initials: "KS",
-    oneLiner: "UIUC · Statistics & CS · data science",
+    // Short facts shown right under the name, in this order.
+    credentials: ["Statistics & CS at UIUC", "Class of 2030", "James Scholar", "GPA 4.0"],
     intro:
       "I'm a first-year at the University of Illinois Urbana-Champaign. I'm most comfortable in Python and Java, I'm most interested in data science, and I'm open to software engineering roles too.",
+    // The ask, shown in the hero under the intro.
+    seeking: "Looking for data science and software engineering internships.",
     email: "kamransingri@gmail.com",
     github: "https://github.com/kamransingri",
     linkedin: "https://www.linkedin.com/in/kamran-singri-745344428/",

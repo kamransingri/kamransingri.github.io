@@ -46,9 +46,13 @@
   function intro(S) {
     var p = S.person;
     return (
-      '<p class="kicker mono">' + esc(p.oneLiner) + "</p>" +
       '<h1 id="intro-title">' + esc(p.name) + "</h1>" +
+      (p.credentials && p.credentials.length
+        ? '<ul class="creds mono" aria-label="At a glance">' +
+          p.credentials.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>"
+        : "") +
       '<p class="lede">' + inline(p.intro) + "</p>" +
+      (p.seeking ? '<p class="seeking">' + inline(p.seeking) + "</p>" : "") +
       '<ul class="link-row" aria-label="Links">' +
       '<li><a class="btn btn-primary" href="' + esc(p.resume) + '">Resume <span class="mono small">PDF</span></a></li>' +
       '<li><a class="btn" href="' + esc(p.github) + '" rel="noopener">GitHub</a></li>' +
@@ -288,7 +292,7 @@
       S.projects.filter(function (p) { return !p.featured; }).map(function (p) {
         return (
           '<li class="other" data-tags="' + dataTags(p) + '">' +
-          '<h3>' + esc(p.title) + status(p) + "</h3>" +
+          '<h4>' + esc(p.title) + status(p) + "</h4>" +
           "<p>" + inline(p.summary) + "</p>" +
           (p.details ? '<p class="muted">' + inline(p.details) + "</p>" : "") +
           tagList(p) +
@@ -323,7 +327,7 @@
       S.activities.map(function (a) {
         return (
           '<li><p class="tl-when mono">' + esc(a.when) + "</p><div>" +
-          "<h3>" + esc(a.role) + ' <span class="at">· ' + esc(a.org) + "</span></h3>" +
+          "<h4>" + esc(a.role) + ' <span class="at">· ' + esc(a.org) + "</span></h4>" +
           "<p>" + inline(a.text) + "</p></div></li>"
         );
       }).join("") +

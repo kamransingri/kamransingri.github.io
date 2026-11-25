@@ -66,3 +66,10 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
 ## Follow-up: Kamran's note on incomplete GitHub projects
 - **Bus Reliability Tracker removed** from Other projects. It's a phase-1 skeleton with nothing to show yet; the About text still mentions it as just started.
 - **NBA Four-Point Line kept.** It has real data and a real chart, and its "in progress" label and narrow role description are honest.
+
+## Layout: recruiter order (after the Impeccable critique)
+- **Why:** the critique found the proof buried. Projects started about 1,600px down, after tutoring, and class year, GPA and the ask weren't on the first screen.
+- **Hero:** the name is followed by an at-a-glance line (`person.credentials`: Statistics & CS at UIUC · Class of 2030 · James Scholar · GPA 4.0), then the intro, then the ask (`person.seeking`). The ask is led by a short red-pen tick. The old kicker above the name is gone.
+- **Order:** Projects (01) → About (02) → Experience (03, with Leadership & activities as a sub-list) → Education & skills (04) → Contact. The nav dropped Activities, leaving five links.
+- **Education & skills:** on wide screens they sit side by side in one band; on phones they stack.
+- **Sub-headings** ("Other projects", "Leadership & activities") are unnumbered h3s; their items are h4s. "03b" is gone.

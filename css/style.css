@@ -99,7 +99,7 @@ img, svg { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration-color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { color: var(--accent); }
 p { margin: 0 0 1em; }
-h1, h2, h3 { line-height: 1.2; margin: 0; font-weight: 600; }
+h1, h2, h3, h4 { line-height: 1.2; margin: 0; font-weight: 600; }
 ul, ol { margin: 0; padding: 0; }
 code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); padding: 0.1em 0.35em; border-radius: 3px; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
@@ -165,13 +165,25 @@ code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); 
 }
 .section h2 { font-size: clamp(1.5rem, 3vw, 1.85rem); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
 .sec-num { display: inline-block; min-width: 2.6rem; font-size: 0.8rem; font-weight: 400; color: var(--accent); vertical-align: 0.3em; }
-.h-sub { margin-top: 3.5rem; font-size: 1.35rem !important; }
+/* Sub-heading inside a section (Other projects, Leadership & activities) */
+.section .h-sub { margin: 3.5rem 0 1.25rem; font-size: 1.35rem; letter-spacing: -0.01em; }
 
 /* ---------- Intro ---------- */
-.intro { padding: clamp(3.5rem, 11vw, 7.5rem) 0 clamp(1rem, 3vw, 2rem); }
+.intro { padding: clamp(3rem, 9vw, 6rem) 0 clamp(1rem, 3vw, 2rem); }
 .kicker { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
-.intro h1 { font-size: clamp(2.75rem, 8vw, 4.5rem); letter-spacing: -0.025em; font-weight: 600; margin-bottom: 1.25rem; }
+.intro h1 { font-size: clamp(2.75rem, 8vw, 4.5rem); letter-spacing: -0.025em; font-weight: 600; margin-bottom: 0.9rem; }
+/* The at-a-glance facts a recruiter screens on, right under the name */
+.creds { list-style: none; display: flex; flex-wrap: wrap; gap: 0.2rem 0; margin: 0 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
+.creds li { white-space: nowrap; }
+/* Separator rides at the end of each item, so a wrapped line never starts with a dot */
+.creds li:not(:last-child)::after { content: "·"; padding: 0 0.6em; color: var(--tick); }
 .lede { font-size: clamp(1.2rem, 2.2vw, 1.375rem); line-height: 1.5; max-width: 36rem; }
+/* The ask, led by a short red-pen tick so it reads as the point of the page */
+.seeking { font-weight: 600; margin: 0; max-width: 36rem; }
+.seeking::before {
+  content: ""; display: inline-block; width: 1.25rem; height: 2px; margin-right: 0.6rem;
+  background: var(--accent); vertical-align: 0.3em;
+}
 .link-row { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
 .link-row.plain { gap: 1.25rem; margin-top: 1rem; font-family: var(--mono); font-size: 0.875rem; }
 
@@ -195,7 +207,7 @@ code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); 
 .tl-item:last-child { padding-bottom: 0.25rem; }
 .tl-item::before { content: ""; position: absolute; left: -1.5rem; top: 0.75rem; width: 0.9rem; height: 1px; background: var(--tick); }
 .tl-when { font-size: 0.8rem; color: var(--muted); margin: 0 0 0.25rem; }
-.tl-body h3, .acts h3, .edu h3 { font-size: 1.2rem; margin-bottom: 0.15rem; }
+.tl-body h3, .acts h4, .edu h3 { font-size: 1.2rem; margin-bottom: 0.15rem; }
 .at { font-weight: 400; color: var(--muted); }
 .meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.6rem; }
 .edu .meta { font-family: var(--serif); font-size: 1.05rem; color: var(--text); margin-bottom: 0.25rem; }
@@ -292,7 +304,7 @@ details.more li { margin-bottom: 0.35rem; }
 .others { list-style: none; display: grid; gap: 0; }
 .other { padding: 1.25rem 0; border-top: 1px solid var(--rule); max-width: var(--measure); }
 .other:first-child { border-top: 0; padding-top: 0; }
-.other h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+.other h4 { font-size: 1.15rem; margin-bottom: 0.35rem; }
 .other p { margin-bottom: 0.4rem; }
 .other .muted { font-size: 0.98rem; }
 @media (min-width: 880px) {
@@ -314,6 +326,12 @@ details.more li { margin-bottom: 0.35rem; }
 @media (min-width: 640px) { .skills div { grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1.25rem; } }
 .skills dt { font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
 .skills dd { margin: 0; }
+/* Education and skills share one compact band on wide screens */
+@media (min-width: 880px) {
+  .edu-band { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 3.5rem; align-items: start; }
+  .edu-band .skills { margin: 0; padding: 0 0 0 1.75rem; border-top: 0; border-left: 1px solid var(--rule); gap: 1.1rem; }
+  .edu-band .skills div { grid-template-columns: 1fr; gap: 0.1rem; }
+}
 
 /* ---------- Contact & footer ---------- */
 .contact { padding-bottom: clamp(3rem, 8vw, 5rem); }
@@ -387,6 +405,10 @@ details.more li { margin-bottom: 0.35rem; }
   .intro h1 { font-size: 26pt; margin-bottom: 0.2cm; }
   .lede { font-size: 11.5pt; }
   .kicker { margin-bottom: 0.2cm; }
+  .creds { margin-bottom: 0.25cm; }
+  .seeking::before { display: none; }
+  .edu-band { display: block; }
+  .edu-band .skills { border: 0; padding: 0.3cm 0 0; }
   .link-row { margin-top: 0.3cm; gap: 0.3cm 0.6cm; }
   .btn, .btn-primary { border: 0; padding: 0; min-height: 0; background: none; color: #000; font-size: 9pt; }
   .btn[href^="http"]::after { content: " " attr(href); color: #333; }
@@ -402,7 +424,7 @@ details.more li { margin-bottom: 0.35rem; }
   .other, .other:first-child { padding: 0.25cm 0; border-top: 1px solid #ddd; break-inside: avoid; }
   .tl-item, .edu li, .acts li { break-inside: avoid; padding-bottom: 0.3cm; }
   details.more > ul { display: block; }
-  .h-sub { margin-top: 0.5cm; }
+  .section .h-sub { margin: 0.5cm 0 0.2cm; font-size: 12pt; }
   .email { border: 0; color: #000; }
   .contact { padding-bottom: 0; }
   a { text-decoration: none; }

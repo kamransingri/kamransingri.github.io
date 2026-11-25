@@ -122,3 +122,23 @@ Every fact that could appear on the site, with its source. Anything not in this 
 | Skills: Python (pandas, NumPy, Matplotlib, Jupyter), Java, TypeScript, JavaScript; Git/GitHub, VS Code, Excel | Java is no longer marked "proficient" |
 | Spanish: bilingual proficiency; State Seal of Biliteracy | Replaces "conversational" |
 | Not on [resume-nov] but kept on the site: Math Tutoring, Track & Field, coursework, Illinois State Scholar seal line, Bus Reliability Tracker mention in About | Kamran asked only to add, not remove |
+
+## From the project repos (read 2026-11-25)
+**NBA four-point line** · [repo:team-Starting-Five-Minus-One] (public)
+| Fact | Note |
+|---|---|
+| Kamran's commit 2026-11-09 "Added Expected Points Graph for 3pt and 4pt" (in `nba_four_point_datasets.ipynb`): expected points per shot = make rate × point value by distance, 22–35 ft; worth 4 past a proposed line at 27 ft; average three marked; chart title "Most deep shots worth 4 would beat an average 3" | The site's chart redraws this from `charts.nba.rows` (distances with 300+ attempts). Average three over 22–33 ft is 1.15 (1.15 over 22–35 too). As a 4, 6 of 7 distances from 27 to 33 ft beat it; 31 ft (1.14) doesn't. |
+| Kamran's commit 2026-11-25 "Added k-means model that cluster shooter types and show 4-point effect on each": `kmeans_results.png`, `kmeans_shooter_types.csv` (250 player-seasons, 2021-22 to 2025-26; types: Corner / catch-and-shoot 103, Volume above-the-break 95, Deep-range creators 52) | Extra PPG from 30+ ft makes, read off the committed chart: about 0.2 for deep-range creators, under 0.05 for the others. **The committed notebook `nba_four_point_kmeans_model.ipynb` is empty (0 bytes).** |
+| Kamran's commit 2026-10-30 "File organization and naming" | Already on the site; no longer listed as a separate bullet |
+| Teammates' work: Monte Carlo + backtesting (mallinitin14), helps/hurts analysis and graphs (jivrajw14), efficiency graph (tanishdundi25) | Not claimed as Kamran's |
+
+**Simmer** · [repo:Project-Fall2026-kamransingri-302314100] (private, CS 124 org), README and package.json
+| Fact | Note |
+|---|---|
+| "Built for a CS 124 independent project" | Resume says "Personal Project". The site now says "Independent project for CS 124". |
+| Live at https://mise-recipe-box.netlify.app (public, returns 200) | Linked as "Try it live"; the repo itself isn't linked because it's private |
+| Recipes: TheMealDB (~790) + Wikibooks Cookbook (3,492 in `public/wikibooks.json`) ≈ 4,300 | Resume says "close to 1,000" |
+| Nutrition from USDA food data (`public/foods.json`); matcher prefers leaving an ingredient blank to guessing | |
+| Diets and nine allergens checked per ingredient; never claims allergen-free | |
+| Pantry with amounts, cook mode with timers, meal calendar, shopping list, daily log against goals, installable PWA with a service worker | |
+| TypeScript, Vite, Vitest, happy-dom, Biome; 59 test files, 104 non-test source files; 69 commits, 2026-10-06 to 2026-11-24 | |

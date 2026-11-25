@@ -104,9 +104,12 @@
   function image(v, prefix) {
     return (
       '<figure class="visual visual-image">' +
+      // zoom: a dense figure (like a matplotlib chart) opens full size when tapped
+      (v.zoom ? '<a class="zoom" href="' + esc(url(v.src, prefix)) + '">' : "") +
       '<img src="' + esc(url(v.src, prefix)) + '"' +
       (v.small ? ' srcset="' + esc(url(v.small, prefix)) + ' 640w, ' + esc(url(v.src, prefix)) + ' 1200w" sizes="(min-width: 880px) 34rem, 100vw"' : "") +
-      ' alt="' + esc(v.alt) + '" width="1200" height="640" loading="lazy" decoding="async">' +
+      ' alt="' + esc(v.alt) + '" width="' + (v.w || 1200) + '" height="' + (v.h || 640) + '" loading="lazy" decoding="async">' +
+      (v.zoom ? "</a>" : "") +
       (v.caption ? "<figcaption>" + inline(v.caption) + "</figcaption>" : "") +
       "</figure>"
     );
@@ -156,71 +159,91 @@
     );
   }
 
-  // Dot-and-line chart of 3P% by distance. Real data from S.charts.nba.
+  // Expected points per shot by distance: Kamran's analysis in the team repo, recomputed from the
+  // same dataset (S.charts.nba). Each distance's make rate x 3, and x 4 past the proposed line.
   function chart(S, opts) {
     opts = opts || {};
-    var C = S.charts.nba, rows = C.rows;
-    var W = Math.round(opts.w || 640), H = Math.round(Math.max(230, Math.min(opts.tall ? 340 : 290, W * 0.56))), m = { t: 22, r: 14, b: 44, l: 44 };
+    var C = S.charts.nba, rows = C.rows, four = C.fourLine;
+    var W = Math.round(opts.w || 640), H = Math.round(Math.max(240, Math.min(opts.tall ? 340 : 300, W * 0.58)));
     var narrow = W < 480;
+    var m = { t: 26, r: narrow ? 46 : 54, b: 44, l: 38 };
     var x0 = rows[0].ft - 0.5, x1 = rows[rows.length - 1].ft + 0.5;
-    var yMin = 0.25, yMax = 0.45;
+    var yMin = 0.8, yMax = 1.5;
     function X(ft) { return m.l + (ft - x0) / (x1 - x0) * (W - m.l - m.r); }
-    function Y(p) { return m.t + (1 - (p - yMin) / (yMax - yMin)) * (H - m.t - m.b); }
+    function Y(v) { return m.t + (1 - (v - yMin) / (yMax - yMin)) * (H - m.t - m.b); }
+    function pct(r) { return r.made / r.att; }
+    // 95% confidence interval on the make rate (normal approximation to the binomial)
+    function ci(r) { var p = pct(r); return 1.96 * Math.sqrt(p * (1 - p) / r.att); }
+    function n(x) { return x.toLocaleString("en-US"); }
+    var tot = rows.reduce(function (a, r) { return [a[0] + r.made, a[1] + r.att]; }, [0, 0]);
+    var avg3 = 3 * tot[0] / tot[1];
+    var deep = rows.filter(function (r) { return r.ft >= four; });
+
     var grid = "", ylab = "";
-    for (var p = yMin; p <= yMax + 1e-9; p += 0.05) {
-      grid += '<line class="grid" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + Y(p).toFixed(1) + '" y2="' + Y(p).toFixed(1) + '"/>';
-      ylab += '<text class="tick" x="' + (m.l - 8) + '" y="' + (Y(p) + 4).toFixed(1) + '" text-anchor="end">' + Math.round(p * 100) + "%</text>";
+    for (var k = 0; k <= Math.round((yMax - yMin) * 10); k++) {
+      var v = yMin + k / 10, y = Y(v).toFixed(1);
+      grid += '<line class="grid" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y + '" y2="' + y + '"/>';
+      if (!narrow || k % 2 === 0) ylab += '<text class="tick" x="' + (m.l - 7) + '" y="' + (Y(v) + 4).toFixed(1) + '" text-anchor="end">' + v.toFixed(1) + "</text>";
     }
     var xlab = rows.filter(function (r, i) { return !narrow || i % 2 === 0; }).map(function (r) {
       return '<text class="tick" x="' + X(r.ft).toFixed(1) + '" y="' + (H - m.b + 18) + '" text-anchor="middle">' + r.ft + "</text>";
     }).join("");
-    // current NBA arc: 23 ft 9 in
-    var arc = X(23.75);
-    var arcLine =
+
+    // Reference lines: today's arc (23 ft 9 in), the proposed 4-point line, and the average three
+    var arc = X(23.75), fx = X(four - 0.5), ay = Y(avg3);
+    var refs =
       '<line class="ref" x1="' + arc.toFixed(1) + '" x2="' + arc.toFixed(1) + '" y1="' + m.t + '" y2="' + (H - m.b) + '"/>' +
-      '<text class="ref-label" x="' + (arc + 6).toFixed(1) + '" y="' + (H - m.b - 8) + '">' + (narrow ? "arc 23′9″" : "current arc, 23′9″") + '</text>';
-    var pts = rows.map(function (r) { return [X(r.ft), Y(r.made / r.att)]; });
-    var path = "M" + pts.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join("L");
-    // 95% confidence interval for each distance (normal approximation to the binomial)
-    function ci(r) { var p = r.made / r.att; return 1.96 * Math.sqrt(p * (1 - p) / r.att); }
-    var errs = rows.map(function (r, i) {
-      var p = r.made / r.att, e = ci(r), x = pts[i][0].toFixed(1);
-      return '<line class="err" x1="' + x + '" x2="' + x + '" y1="' + Y(p + e).toFixed(1) + '" y2="' + Y(p - e).toFixed(1) + '"/>';
-    }).join("");
-    var dots = rows.map(function (r, i) {
-      var pct = (r.made / r.att * 100).toFixed(1);
-      var label = r.ft + " ft: " + pct + "% ± " + (ci(r) * 100).toFixed(1) + " (" + r.made.toLocaleString("en-US") + " of " + r.att.toLocaleString("en-US") + ")";
+      '<text class="ref-label" x="' + (arc + 5).toFixed(1) + '" y="' + (H - m.b - 7) + '">' + (narrow ? "arc 23′9″" : "current arc, 23′9″") + "</text>" +
+      '<line class="ref four" x1="' + fx.toFixed(1) + '" x2="' + fx.toFixed(1) + '" y1="' + (m.t - 8) + '" y2="' + (H - m.b) + '"/>' +
+      '<text class="ref-label four" x="' + (fx + 5).toFixed(1) + '" y="' + (m.t - 1) + '">' + (narrow ? "4-pt line " + four + "′" : "proposed 4-pt line, " + four + " ft") + "</text>" +
+      '<line class="ref avg" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + ay.toFixed(1) + '" y2="' + ay.toFixed(1) + '"/>' +
+      '<text class="ref-label" x="' + (m.l + 4) + '" y="' + (ay + 16).toFixed(1) + '">' + (narrow ? "avg 3: " : "average 3: ") + avg3.toFixed(2) + "</text>";
+
+    function series(list, mult, cls) {
+      var p = list.map(function (r) { return [X(r.ft), Y(mult * pct(r))]; });
+      return {
+        p: p,
+        path: '<path class="line ' + cls + '" d="M' + p.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join("L") + '"/>',
+        errs: list.map(function (r, i) {
+          var e = mult * ci(r), v = mult * pct(r), x = p[i][0].toFixed(1);
+          return '<line class="err ' + cls + '" x1="' + x + '" x2="' + x + '" y1="' + Y(v + e).toFixed(1) + '" y2="' + Y(v - e).toFixed(1) + '"/>';
+        }).join(""),
+        dots: list.map(function (r, i) { return '<circle class="dot ' + cls + '" cx="' + p[i][0].toFixed(1) + '" cy="' + p[i][1].toFixed(1) + '" r="4"/>'; }).join("")
+      };
+    }
+    var s3 = series(rows, 3, "as3"), s4 = series(deep, 4, "as4");
+
+    // One focusable point per distance (on the worth-3 dot); its label carries both values
+    var pts = rows.map(function (r, i) {
+      var label = r.ft + " ft: " + (pct(r) * 100).toFixed(1) + "% of " + n(r.att) + " → " + (3 * pct(r)).toFixed(2) + " pts as a 3" +
+        (r.ft >= four ? ", " + (4 * pct(r)).toFixed(2) + " as a 4" : "");
+      var c = s3.p[i];
       return '<g class="pt" tabindex="' + (i === 0 ? 0 : -1) + '" role="listitem" aria-label="' + label + '" data-tip="' + label + '">' +
-        '<circle class="hit" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="14"/>' +
-        '<circle class="dot" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="4.5"/>' +
+        '<circle class="hit" cx="' + c[0].toFixed(1) + '" cy="' + c[1].toFixed(1) + '" r="14"/>' +
+        '<circle class="dot as3" cx="' + c[0].toFixed(1) + '" cy="' + c[1].toFixed(1) + '" r="4"/>' +
         "<title>" + label + "</title></g>";
     }).join("");
+    var e3 = s3.p[s3.p.length - 1], e4 = s4.p[s4.p.length - 1];
+    var ends =
+      '<text class="direct as4" x="' + (e4[0] + 9).toFixed(1) + '" y="' + (e4[1] + 4).toFixed(1) + '">as a 4</text>' +
+      '<text class="direct as3" x="' + (e3[0] + 9).toFixed(1) + '" y="' + (e3[1] + 4).toFixed(1) + '">as a 3</text>';
+
     var first = rows[0], last = rows[rows.length - 1];
-    // Label only the points the takeaway names. The first sits above-right of its dot; the last
-    // sits below-left, where the falling line leaves room and it can't touch the next point's bar.
-    var labels = C.labelFt || [];
-    var direct = rows.map(function (r, i) {
-      var k = labels.indexOf(r.ft);
-      if (k < 0) return "";
-      var last = k === labels.length - 1 && labels.length > 1;
-      return '<text class="direct" x="' + (pts[i][0] + (last ? -7 : 7)).toFixed(1) + '" y="' + (pts[i][1] + (last ? 17 : -9)).toFixed(1) + '"' +
-        (last ? ' text-anchor="end"' : "") + ">" + (r.made / r.att * 100).toFixed(1) + "%</text>";
-    }).join("");
     var svg =
       '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-labelledby="nba-chart-title">' +
-      '<title id="nba-chart-title">3-point percentage by shot distance, ' + first.ft + " to " + last.ft + " feet</title>" +
-      grid + ylab + xlab + arcLine +
-      '<text class="axis-label" x="4" y="12">' + esc(C.yLabel) + "</text>" +
-      errs +
-      '<path class="line" d="' + path + '"/>' +
-      '<g role="list">' + dots + "</g>" + direct +
+      '<title id="nba-chart-title">Expected points per shot by distance, ' + first.ft + " to " + last.ft + " feet: as a 3, and as a 4 past a " + four + "-foot line, against an average three worth " + avg3.toFixed(2) + "</title>" +
+      grid + ylab + xlab + refs +
+      '<text class="axis-label" x="4" y="11">' + esc(C.yLabel) + "</text>" +
+      s3.errs + s4.errs + s3.path + s4.path + s4.dots +
+      '<g role="list">' + pts + "</g>" + ends +
       '<text class="axis-label" x="' + ((m.l + W - m.r) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(C.xLabel) + "</text>" +
       "</svg>";
     var table =
       '<details class="data-table"><summary>Show the numbers</summary><div class="table-wrap"><table>' +
-      '<thead><tr><th scope="col">Distance</th><th scope="col">Made</th><th scope="col">Attempted</th><th scope="col">3-point %</th><th scope="col">95% CI</th></tr></thead><tbody>' +
+      '<thead><tr><th scope="col">Distance</th><th scope="col">Made</th><th scope="col">Attempted</th><th scope="col">3-point % (95% CI)</th><th scope="col">Pts as a 3</th><th scope="col">Pts as a 4</th></tr></thead><tbody>' +
       rows.map(function (r) {
-        return "<tr><td>" + r.ft + " ft</td><td>" + r.made.toLocaleString("en-US") + "</td><td>" + r.att.toLocaleString("en-US") + "</td><td>" + (r.made / r.att * 100).toFixed(1) + "%</td><td>± " + (ci(r) * 100).toFixed(1) + "</td></tr>";
+        return "<tr><td>" + r.ft + " ft</td><td>" + n(r.made) + "</td><td>" + n(r.att) + "</td><td>" + (pct(r) * 100).toFixed(1) + "% ± " + (ci(r) * 100).toFixed(1) + "</td><td>" +
+          (3 * pct(r)).toFixed(2) + "</td><td>" + (r.ft >= four ? (4 * pct(r)).toFixed(2) : "–") + "</td></tr>";
       }).join("") +
       "</tbody></table></div></details>";
     return { svg: svg, table: table };

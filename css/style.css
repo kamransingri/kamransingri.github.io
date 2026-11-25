@@ -264,6 +264,8 @@ details.more li { margin-bottom: 0.35rem; }
 .visual-sprites .sprite-row { display: flex; flex-wrap: wrap; justify-content: space-around; align-items: end; gap: 0.75rem; padding: 1.5rem 1rem; }
 .visual-sprites img { width: clamp(44px, 9vw, 72px); height: auto; image-rendering: auto; }
 .visual-image img { width: 100%; height: auto; }
+.visual-image .zoom { display: block; cursor: zoom-in; }
+.visual-image .zoom img { background: #fff; }
 
 .board { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 0.9rem; max-width: 24rem; }
 .cell {
@@ -296,6 +298,14 @@ details.more li { margin-bottom: 0.35rem; }
 .chart .pt:hover .dot, .chart .pt:focus .dot, .chart .pt.on .dot { r: 6.5; }
 .chart .pt:focus-visible .hit { stroke: var(--focus); stroke-width: 2; }
 .chart .direct { fill: var(--text); font-size: 12px; font-weight: 500; }
+/* Expected-points chart: worth 4 (the argument) in the red pen, worth 3 in pencil grey */
+.chart .line.as3 { stroke: var(--muted); stroke-width: 1.5; }
+.chart .dot.as3 { fill: var(--muted); }
+.chart .err.as3 { stroke: var(--muted); stroke-opacity: 0.45; }
+.chart .ref.four { stroke: var(--accent); stroke-dasharray: none; stroke-opacity: 0.7; }
+.chart .ref-label.four, .chart .direct.as4 { fill: var(--accent); }
+.chart .direct.as3 { fill: var(--muted); }
+.chart .direct.as3, .chart .direct.as4 { font-size: 11px; }
 .tip {
   position: absolute; pointer-events: none; transform: translate(-50%, -100%);
   background: var(--text); color: var(--bg); font-family: var(--mono); font-size: 0.75rem; line-height: 1.3;

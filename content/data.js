@@ -78,28 +78,37 @@ window.SITE = {
       ],
       visual: {
         type: "chart",
-        // The trend over the well-sampled range; the two labeled points on the chart match it.
-        takeaway: "From 24 to 30 feet, three-point accuracy falls from 39.7% to 31.0%.",
+        // 6 of the 7 distances from 27 to 33 ft beat 1.15 as a 4 (31 ft, at 1.14, doesn't). Recheck if the rows change.
+        takeaway: "Counted as 4 past a 27-foot line, shots at 6 of 7 distances would beat an average three.",
         caption:
-          "Each season's 50 players with the most made threes, 2021-22 to 2025-26. Bars are 95% confidence intervals; they widen where there are fewer shots. The 22 ft point is mostly corner threes. I computed this from the team's dataset; it isn't a team result.",
+          "Expected points per shot is the make rate times what the shot is worth. This is the analysis I built for the team, redrawn from its dataset: each season's 50 players with the most made threes, 2021-22 to 2025-26. Bars are 95% confidence intervals; the 22 ft point is mostly corner threes.",
         source: "nba"
       },
       page: {
         question:
           "What could a four-point line look like in the NBA? Our team in UIUC's Data Science Club is exploring that with real shooting data.",
         built: [
-          "I built an expected-points (EPA) analysis by shot distance that weighs a shot's point value against its distance. We used it to pick a candidate line placement that preserves the value of the three-pointer.",
+          "I built the team's expected-points analysis: at every distance, the make rate times what the shot is worth, as a 3 and as a 4 past a proposed line at 27 feet. Most deep shots worth 4 would beat an average three, which is the case for a line there. The chart above redraws it.",
+          "I built a k-means model that sorts 250 player-seasons into three shooter types: corner / catch-and-shoot, volume above-the-break, and deep-range creators. A 4-point line would mostly reward the deep-range creators, at about 0.2 extra points per game from 30+ ft makes against under 0.05 for the other two types.",
           "I helped define what our Monte Carlo simulation would model (a teammate implemented it). The simulation is validated by backtesting on the 2024-25 and 2025-26 seasons.",
           "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from the arc out to 40+ ft, plus distance-bucket summaries for each player.",
-          "Early on, I reorganized the repo so data loading (`nba_four_point_datasets.py`) and graphing (`nba_four_point_graphs.py`) live in separate modules.",
           "Now I'm helping build the presentation of our findings for the club board."
         ],
+        extras: [
+          {
+            type: "image",
+            src: "assets/img/nba-kmeans.png", w: 1950, h: 750, zoom: true,
+            alt: "Two charts from the k-means model. Left: 250 player-seasons plotted by share of threes from 30+ feet against 3-point percentage, colored by shooter type. Right: extra points per game from 30+ foot makes by type, about 0.2 for deep-range creators and under 0.05 for the other two.",
+            caption: "My k-means output, as committed to the team repo: the three shooter types (left) and who a 4-point line would reward (right). Tap to open it full size."
+          }
+        ],
         techniques: [
-          ["EPA by shot distance", "Weighing each shot's point value against its distance to find where a four-point line would keep the three-pointer worth taking."],
+          ["Expected points per shot", "Make rate times point value at every foot, as a 3 and as a 4, compared with the average three."],
+          ["k-means clustering", "Grouping player-seasons into shooter types, then measuring who a 4-point line would reward."],
           ["Monte Carlo simulation", "Helped scope what the team's simulation models, and its backtest on the 2024-25 and 2025-26 seasons."]
         ],
         learned:
-          "On a team of five, splitting the work cleanly matters: separate files for loading and graphing let us work in parallel, and agreeing on exactly what the simulation should model let a teammate build it. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",
+          "On a team of five, splitting the work cleanly matters: agreeing on exactly what the simulation should model let a teammate build it while I worked on expected points and shooter types. The data also taught me to respect sample size: very few shots come from 30+ feet, so the confidence intervals there are wide and any four-point estimate that far out needs care.",
         note: ""
       }
     },
@@ -228,13 +237,14 @@ window.SITE = {
       featured: true,
       status: "In progress",
       summary:
-        "A recipe and nutrition web app with close to 1,000 recipes. Search and filter by diet, cuisine, allergens and nutrition, or let the pantry feature suggest recipes from what you already have.",
+        "A recipe and nutrition web app with about 4,300 recipes from two free collections. Search by diet, cuisine, allergens and macros, find what you can cook from your pantry, cook step by step with timers, and log meals against daily goals. It installs on a phone and keeps working on a weak signal.",
       details:
-        "I chose a nutrition data source with enough coverage for the ingredients in diverse recipes, then wrote the matching behind per-serving nutrition, recipe scaling and daily nutrient tracking. I plan the roadmap from feedback from 5 classmates, and I use Claude to speed up development while keeping the code organized and tested.",
+        "I chose USDA food data for nutrition and wrote the matching behind it: each ingredient is matched to a food, and the matcher leaves an ingredient blank rather than guess. Diets and nine allergens are checked ingredient by ingredient, and the app never claims a recipe is allergen-free. 59 test files back it, including click-through tests that drive the whole app in a simulated browser. I plan the roadmap from feedback from 5 classmates, and I use Claude to speed up development while keeping the code organized and tested.",
       tags: ["TypeScript"],
-      stack: ["TypeScript"],
-      context: "Personal project · Aug 2026 – present",
-      links: []
+      stack: ["TypeScript", "Vite", "Vitest"],
+      context: "Independent project for CS 124 · Aug 2026 – present",
+      // The repo is private, so the site links the live app, not the code.
+      links: [{ label: "Try it live", href: "https://mise-recipe-box.netlify.app" }]
       // No write-up page or visual yet: it shows as a text-only featured card.
     },
     {
@@ -320,7 +330,7 @@ window.SITE = {
   skills: [
     ["Languages", "Python, Java, TypeScript, JavaScript"],
     ["Data", "pandas, NumPy, Matplotlib, Jupyter, Excel, Google Sheets"],
-    ["Tools", "Git & GitHub, VS Code, JavaFX, HTML/CSS, pytest"],
+    ["Tools", "Git & GitHub, VS Code, JavaFX, HTML/CSS, Vite, Vitest, pytest"],
     ["Spoken", "English, Spanish (bilingual proficiency; State Seal of Biliteracy)"]
   ],
 
@@ -363,9 +373,8 @@ window.SITE = {
   charts: {
     nba: {
       xLabel: "Shot distance (ft)",
-      yLabel: "3-point %",
-      line: 0.4, // reference line drawn at 40%
-      labelFt: [24, 30], // points labeled on the chart; keep these matching the takeaway
+      yLabel: "Expected points per shot",
+      fourLine: 27, // the proposed 4-point distance in Kamran's notebook (nba_four_point_datasets.ipynb)
       rows: [
         { ft: 22, made: 2990, att: 7101 },
         { ft: 23, made: 5639, att: 13307 },

@@ -3,7 +3,8 @@
 Every fact that could appear on the site, with its source. Anything not in this file should not be on the site.
 
 **Source tags**
-- `[resume-oct]`: `KAMRAN_SINGRI.docx`, last modified 2026-10-22. This is the most recent resume and wins any conflict.
+- `[resume-nov]`: `Freshman Sem1 Resume - Kamran Singri.docx`, last modified 2026-11-23. This is the most recent resume and wins any conflict. Facts it adds or changes are in "Updates from [resume-nov]" at the end of this file.
+- `[resume-oct]`: `KAMRAN_SINGRI.docx`, last modified 2026-10-22.
 - `[resume-aug]`: `Freshman_Resume_-_Kamran_Singri.docx`, last modified 2026-09-01.
 - `[brief]`: the instructions Kamran wrote for this build.
 - `[old-site]`: the earlier version of kamransingri.github.io (commit 5c99b42, 2026-10-08). Kamran committed it. Its project descriptions were written from the project code in an earlier session. That code (`Final Version Projects CSA&CSP`) is not available here, so these items are **second-hand**.
@@ -103,3 +104,21 @@ Every fact that could appear on the site, with its source. Anything not in this 
 - **Track & Field**: no separate entry. It is mentioned once in About ("sports"), and the recruiting line appears as one short line under Activities.
 - Skills chips for Excel/PowerPoint/Slides/Sheets: shown once in Education/Skills text, not as chips.
 - The old site's headline stats ("5 projects built", "60 students led"). They read as padding.
+
+## Updates from [resume-nov]
+| Fact | Note |
+|---|---|
+| Expected graduation **May 2029** | Replaces May 2030 from [resume-oct]. Hero line now says "Class of 2029". |
+| NBA four-point line: Data Science Club, team of 5, Aug 2026 – present; Python, pandas | Replaces "Fall 2026" |
+| NBA: analyzing multi-season shooting data to find where a four-point line should sit and how it would change player performance and style of play | |
+| NBA: Kamran built an EPA-by-shot-distance analysis weighing a shot's point value against its distance, used to pick a candidate line placement that preserves the value of the three-pointer | |
+| NBA: helped define what the Monte Carlo simulation models (a teammate implemented it); validated by backtesting on 2024-25 and 2025-26; helping build the presentation for the club board | |
+| Simmer: Recipe & Nutrition Web App, personal project, TypeScript, Aug 2026 – present | New project |
+| Simmer: close to 1,000 recipes; search and filter by diet, cuisine, allergens, nutrition; pantry feature suggests recipes from what you have | |
+| Simmer: researched and chose a nutrition data source; wrote matching logic for per-serving nutrition, recipe scaling, daily nutrient tracking | |
+| Simmer: planned the roadmap, tested by hand, gathered feedback from 5 classmates; used Claude to speed up development while keeping the code organized and tested | |
+| Kids Against Hunger: monthly events of 50+ volunteers producing nearly 1,000 meals; guides new volunteers using 10+ years of experience; annual 5K (check-in, banners, water station, awards, cleanup) | |
+| Business Professionals of America, Competitor, Sep 2023 – Feb 2024: regionals three times (Payroll Accounting, Banking & Finance); income statements and balance sheets; Wix site with a team of 4 | Kamran asked to add resume items missing from the site (2026-11-25), which reverses the earlier "Cut from the site" decision. Shown as one line under Leadership & activities. |
+| Skills: Python (pandas, NumPy, Matplotlib, Jupyter), Java, TypeScript, JavaScript; Git/GitHub, VS Code, Excel | Java is no longer marked "proficient" |
+| Spanish: bilingual proficiency; State Seal of Biliteracy | Replaces "conversational" |
+| Not on [resume-nov] but kept on the site: Math Tutoring, Track & Field, coursework, Illinois State Scholar seal line, Bus Reliability Tracker mention in About | Kamran asked only to add, not remove |

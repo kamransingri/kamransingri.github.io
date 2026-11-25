@@ -57,7 +57,7 @@ _Final: all six phases done._
    - `Kamran_Singri_Resume_v3.docx` and `Claude Resume Version 1.docx`: on your PC, so I couldn't open them.
 10. **Blank fields in your brief:** filled from your documents and accounts:
     - name "Kamran Singri"
-    - graduation May 2030
+    - graduation May 2029 (was May 2030; updated from the Nov 2026 resume)
     - GitHub `kamransingri`
     - LinkedIn `kamran-singri-745344428` (from the old site)
     - email kamransingri@gmail.com

@@ -11,7 +11,7 @@ window.SITE = {
     name: "Kamran Singri",
     initials: "KS",
     // Short facts shown right under the name, in this order.
-    credentials: ["Statistics & CS at UIUC", "Class of 2030", "James Scholar", "GPA 4.0"],
+    credentials: ["Statistics & CS at UIUC", "Class of 2029", "James Scholar", "GPA 4.0"],
     intro:
       "I'm a first-year at the University of Illinois Urbana-Champaign. I'm most comfortable in Python and Java, I'm most interested in data science, and I'm open to software engineering roles too.",
     // The ask, shown in the hero under the intro.
@@ -25,7 +25,7 @@ window.SITE = {
   },
 
   about: [
-    "I study Statistics & Computer Science at UIUC as part of the James Scholar Honors Program. A lot of what I've built so far is in Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data. This semester I'm on a Data Science Club team looking at what a four-point line would mean for NBA shooters, and I've started a project tracking how reliable Champaign's buses actually are.",
+    "I study Statistics & Computer Science at UIUC as part of the James Scholar Honors Program. A lot of what I've built so far is in Java: games and simulations with a lot of moving objects. Lately I've been pulling toward data. This semester I'm on a Data Science Club team working out where an NBA four-point line should sit, and on my own I'm building Simmer, a recipe and nutrition web app in TypeScript. I've also started a project tracking how reliable Champaign's buses actually are.",
     "Before college I mentored elementary schoolers through Computer Science Kids, tutored high school students in math, and ran track. I've also packed meals with Kids Against Hunger since 2016. Away from the keyboard, most of my free time goes to sports, music, the gym and cooking."
   ],
 
@@ -130,10 +130,10 @@ window.SITE = {
       featured: true,
       status: "In progress",
       summary:
-        "Data Science Club team project on a hypothetical NBA four-point line, built on five seasons of shot-distance data for the league's top 3-point shooters.",
+        "A Data Science Club team of five using multi-season NBA shooting data to find where a four-point line should sit, and how it would change player performance and style of play.",
       tags: ["Python", "Data"],
       stack: ["Python", "pandas", "Team project"],
-      context: "UIUC Data Science Club · team project · Fall 2026",
+      context: "UIUC Data Science Club · team of 5 · Aug 2026 – present",
       links: [
         { label: "Team repo", href: "https://github.com/UIUC-DSC/team-Starting-Five-Minus-One" }
       ],
@@ -148,8 +148,10 @@ window.SITE = {
           "What could a four-point line look like in the NBA? Our team in UIUC's Data Science Club is exploring that with real shooting data.",
         built: [
           "The team's dataset covers the top 50 three-point makers in each season from 2021-22 to 2025-26. It gives makes and attempts at every distance, foot by foot from the arc out to 40+ ft, plus distance-bucket summaries for each player.",
-          "My part so far: I reorganized the repo and set up the project's structure. I renamed the loader to `nba_four_point_datasets.py` and created `nba_four_point_graphs.py`, which imports the loaded DataFrame so graphing code stays separate from data loading.",
-          "The analysis itself is still in progress with the team."
+          "I built an EPA-by-shot-distance analysis that weighs a shot's point value against its distance. We used it to pick a candidate line placement that preserves the value of the three-pointer.",
+          "I helped define what our Monte Carlo simulation would model (a teammate implemented it). The simulation is validated by backtesting on the 2024-25 and 2025-26 seasons.",
+          "Early on, I reorganized the repo so data loading (`nba_four_point_datasets.py`) and graphing (`nba_four_point_graphs.py`) live in separate modules.",
+          "Now I'm helping build the presentation of our findings for the club board."
         ],
         extras: [
           {
@@ -160,6 +162,8 @@ window.SITE = {
           }
         ],
         techniques: [
+          ["EPA by shot distance", "Weighing each shot's point value against its distance to find where a four-point line would keep the three-pointer worth taking."],
+          ["Monte Carlo simulation", "Helped scope what the team's simulation models, and its backtest on the 2024-25 and 2025-26 seasons."],
           ["pandas", "Loading the shot-distance CSVs into DataFrames."],
           ["Module structure", "Separating data loading from graphing so teammates can work on graphs without touching the data-loading code."],
           ["Git with a team", "Working in a shared repo in the club's GitHub organization."]
@@ -259,6 +263,19 @@ window.SITE = {
       }
     },
     {
+      slug: "simmer",
+      title: "Simmer",
+      featured: false,
+      status: "In progress",
+      summary:
+        "A recipe and nutrition web app with close to 1,000 recipes. Search and filter by diet, cuisine, allergens and nutrition, or let the pantry feature suggest recipes from what you already have.",
+      details:
+        "I chose a nutrition data source with enough coverage for the ingredients in diverse recipes, then wrote the matching behind per-serving nutrition, recipe scaling and daily nutrient tracking. I plan the roadmap from feedback from 5 classmates, and I use Claude to speed up development while keeping the code organized and tested.",
+      tags: ["TypeScript"],
+      stack: ["TypeScript", "Personal project"],
+      links: []
+    },
+    {
       slug: "civ-tycoon",
       title: "Civ Tycoon",
       featured: false,
@@ -288,7 +305,7 @@ window.SITE = {
     {
       school: "University of Illinois Urbana-Champaign",
       degree: "B.S. in Statistics & Computer Science",
-      when: "Expected May 2030",
+      when: "Expected May 2029",
       lines: [
         "James Scholar Honors Program · GPA 4.0 / 4.0",
         "Coursework: Programming in Java, Data Analysis & Visualization, Calculus sequence"
@@ -306,29 +323,35 @@ window.SITE = {
   ],
 
   skills: [
-    ["Languages", "Java (proficient), Python, JavaScript"],
-    ["Data & tools", "pandas, JavaFX, HTML/CSS, Git & GitHub, pytest, Excel, Google Sheets"],
-    ["Spoken", "English, Spanish (conversational; Seal of Biliteracy)"]
+    ["Languages", "Python, Java, TypeScript, JavaScript"],
+    ["Data & tools", "pandas, NumPy, Matplotlib, Jupyter, JavaFX, HTML/CSS, Git & GitHub, VS Code, pytest, Excel, Google Sheets"],
+    ["Spoken", "English, Spanish (bilingual proficiency; State Seal of Biliteracy)"]
   ],
 
   activities: [
     {
       role: "Project team member",
       org: "Data Science Club, UIUC",
-      when: "Fall 2026",
-      text: "Team project analyzing a hypothetical NBA four-point line with five seasons of shot-distance data."
+      when: "Aug 2026 – present",
+      text: "Team of five working out where an NBA four-point line should sit, using multi-season shot-distance data."
     },
     {
       role: "Volunteer",
       org: "Kids Against Hunger",
       when: "2016 – present",
-      text: "Monthly meal-packing for 10+ years. I set up logistics for the annual 5K charity run and onboard new volunteers."
+      text: "Monthly meal-packing events of 50+ volunteers that produce nearly 1,000 meals. After 10+ years, I guide new volunteers into roles, and I help run the annual 5K charity run."
     },
     {
       role: "Athlete",
       org: "Track & Field (high school)",
       when: "2022 – 2025",
       text: "Competed in 2–3 events per meet across three winter and spring seasons, and recruited 5+ new athletes when the roster was short."
+    },
+    {
+      role: "Competitor",
+      org: "Business Professionals of America",
+      when: "Sep 2023 – Feb 2024",
+      text: "Competed at regionals three times in Payroll Accounting and Banking & Finance, preparing income statements and balance sheets from business scenarios."
     }
   ],
 

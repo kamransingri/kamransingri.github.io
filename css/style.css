@@ -387,6 +387,26 @@ details.more li { margin-bottom: 0.35rem; }
 /* Sprites were drawn for a light background, so keep their tray light in both themes. */
 .visual-sprites .sprite-row { background: #efebe3; border-color: var(--rule); }
 
+/* ---------- Touch: every control gets a 44px target; mouse layouts stay as drawn ---------- */
+@media (pointer: coarse) {
+  .nav-links a { padding-block: 0.75rem; }
+  .theme-toggle { width: 2.75rem; height: 2.75rem; }
+  .btn, .btn-small { min-height: 2.75rem; }
+  .project-links a { padding-block: 0.7rem; }
+  .link-row.plain a, .footer-inner a, .crumb a { display: inline-block; padding-block: 0.75rem; }
+  details.more summary, .data-table summary { min-height: 2.75rem; display: flex; align-items: center; }
+  /* Small visible marks that keep their look: widen only the hit area */
+  .brand, .email { position: relative; }
+  .brand::after { content: ""; position: absolute; inset: -0.7rem; }
+  .email::after { content: ""; position: absolute; inset: -0.55rem 0; }
+}
+
+/* Phones: the four hero links sit as an even 2×2 block instead of 3 + 1 orphan */
+@media (max-width: 30rem) {
+  .intro .link-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .intro .link-row .btn { width: 100%; justify-content: center; }
+}
+
 /* ---------- Print: a clean, resume-like printout ---------- */
 @media print {
   :root, :root[data-theme="dark"] {

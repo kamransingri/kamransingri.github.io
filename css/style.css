@@ -243,7 +243,10 @@ details.more li { margin-bottom: 0.35rem; }
 .project:first-child { border-top: 0; padding-top: 0.5rem; }
 @media (min-width: 880px) {
   .project { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 3rem; align-items: start; }
+  /* A featured project without a visual yet (Simmer) reads as one text column, not half a row */
+  .project.no-visual { grid-template-columns: minmax(0, 1fr); }
 }
+.project.no-visual .project-text { max-width: var(--measure); }
 .idx { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; }
 .project h3 { font-size: clamp(1.4rem, 2.6vw, 1.7rem); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
 .project h3 a { text-decoration: none; }

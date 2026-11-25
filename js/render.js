@@ -253,25 +253,32 @@
   }
 
   function featured(S) {
-    return S.projects.filter(function (p) { return p.featured; }).map(function (p, i) {
-      var links = [{ label: "Read the write-up", href: "projects/" + p.slug + ".html" }].concat(p.links || []);
+    return S.projects.filter(function (p) { return p.featured; }).map(function (p) {
+      var page = p.page ? "projects/" + p.slug + ".html" : "";
+      var links = (page ? [{ label: "Read the write-up", href: page }] : []).concat(p.links || []);
       return (
-        '<article class="project" aria-labelledby="pj-' + p.slug + '">' +
+        '<article class="project' + (p.visual ? "" : " no-visual") + '" aria-labelledby="pj-' + p.slug + '">' +
         '<div class="project-text">' +
         (p.context ? '<p class="idx mono">' + esc(p.context) + "</p>" : "") +
         // The title links to the write-up too, but "Read the write-up" below is the one tab stop.
-        '<h3 id="pj-' + p.slug + '"><a href="projects/' + p.slug + '.html" tabindex="-1">' + esc(p.title) + "</a>" + status(p) + "</h3>" +
+        '<h3 id="pj-' + p.slug + '">' + (page ? '<a href="' + page + '" tabindex="-1">' + esc(p.title) + "</a>" : esc(p.title)) + status(p) + "</h3>" +
         "<p>" + inline(p.summary) + "</p>" +
+        (p.details ? '<p class="muted">' + inline(p.details) + "</p>" : "") +
         tagList(p) +
-        '<ul class="project-links">' +
-        links.map(function (l) {
-          return '<li><a href="' + esc(l.href) + '"' + linkAttrs(l.href) + ">" + esc(l.label) + (isExternal(l.href) ? ' <span aria-hidden="true">↗</span>' : ' <span aria-hidden="true">→</span>') + "</a></li>";
-        }).join("") +
-        "</ul></div>" +
-        '<div class="project-visual">' + visual(S, p, "") + "</div>" +
+        linkList(links) +
+        "</div>" +
+        (p.visual ? '<div class="project-visual">' + visual(S, p, "") + "</div>" : "") +
         "</article>"
       );
     }).join("");
+  }
+
+  function linkList(links) {
+    if (!links.length) return "";
+    return '<ul class="project-links">' +
+      links.map(function (l) {
+        return '<li><a href="' + esc(l.href) + '"' + linkAttrs(l.href) + ">" + esc(l.label) + (isExternal(l.href) ? ' <span aria-hidden="true">↗</span>' : ' <span aria-hidden="true">→</span>') + "</a></li>";
+      }).join("") + "</ul>";
   }
 
   function others(S) {
@@ -283,6 +290,7 @@
           "<p>" + inline(p.summary) + "</p>" +
           (p.details ? '<p class="muted">' + inline(p.details) + "</p>" : "") +
           tagList(p) +
+          linkList(p.page ? [{ label: "Read the write-up", href: "projects/" + p.slug + ".html" }] : []) +
           "</li>"
         );
       }).join("") + "</ul>";
@@ -373,7 +381,8 @@
 
   /* ---------- Project page ---------- */
   function projectPage(S, slug) {
-    var all = S.projects.filter(function (p) { return p.featured; });
+    // Every project with a write-up gets a page, featured or not; "Next project" follows data.js order.
+    var all = S.projects.filter(function (p) { return p.page; });
     var idx = -1;
     all.forEach(function (p, i) { if (p.slug === slug) idx = i; });
     if (idx < 0) return "<p>Project not found. <a href=\"../index.html#projects\">Back to projects</a></p>";

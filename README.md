@@ -23,12 +23,12 @@ Kamran Singri's personal site. It's plain HTML, CSS and vanilla JavaScript, with
 
 **Projects:**
 - Each project has `slug`, `title`, `summary`, `tags` (not shown on the page; kept as metadata), `stack` (shown as small labels) and optional `links`.
-- **To feature a project:** set `featured: true`. Featured projects also need a `visual` and a `page` block (`question`, `built`, `techniques`, `learned`, optional `extras`). The four existing ones are good templates.
+- **To feature a project:** set `featured: true`. Add a `visual` to give it a picture (without one it shows as a text-only card), and a `page` block (`question`, `built`, `techniques`, `learned`, optional `extras`) to give it a write-up. A project with a `page` gets a write-up whether or not it is featured. Projects appear in the order they are listed.
 - **To add a code link to a project:**
   ```js
   links: [{ label: "Code", href: "https://github.com/kamransingri/<repo>" }]
   ```
-- **To add a new featured project page:** add the project to `data.js`, then run the prerender step below. It creates `projects/<slug>.html` from `tools/project-template.html`.
+- **To add a new write-up page:** add the project to `data.js`, then run the prerender step below. It creates `projects/<slug>.html` from `tools/project-template.html`.
 
 ### Optional: refresh the no-JavaScript copy
 The browser builds every page from `data.js`. The HTML files also hold a pre-rendered copy, so the site reads fine with JavaScript turned off and link previews show real text. After you edit `data.js`, refresh that copy with Node 18 or newer:
@@ -85,7 +85,7 @@ The repo `kamransingri/kamransingri.github.io` already exists, and this redesign
 ## Project layout
 ```
 index.html                  the single page (contains a prerendered copy of data.js content)
-projects/*.html             one write-up per featured project (generated)
+projects/*.html             one write-up per project with a `page` block (generated)
 content/data.js             ALL site content
 content/inventory.md        every fact on the site, with its source
 content/projects-ranking.md how projects were scored and chosen

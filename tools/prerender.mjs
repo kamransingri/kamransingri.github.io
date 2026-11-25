@@ -32,11 +32,11 @@ for (const k of ["intro", "about", "experience", "featured", "others", "educatio
 }
 fs.writeFileSync(indexPath, index);
 
-// Project pages (one per featured project), generated from a shared template
+// Project pages (one per project with a page block), generated from a shared template
 const tpl = fs.readFileSync(path.join(root, "tools/project-template.html"), "utf8");
 fs.mkdirSync(path.join(root, "projects"), { recursive: true });
 const wanted = new Set();
-for (const p of S.projects.filter((x) => x.featured)) {
+for (const p of S.projects.filter((x) => x.page)) {
   const file = `${p.slug}.html`;
   wanted.add(file);
   const desc = R.esc(p.summary);

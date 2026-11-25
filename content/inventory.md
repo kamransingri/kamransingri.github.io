@@ -135,9 +135,9 @@ Every fact that could appear on the site, with its source. Anything not in this 
 **Simmer** · [repo:Project-Fall2026-kamransingri-302314100] (private, CS 124 org), README and package.json
 | Fact | Note |
 |---|---|
-| "Built for a CS 124 independent project" | Resume says "Personal Project". The site now says "Independent project for CS 124". |
+| "Built for a CS 124 independent project" | Resume says "Personal Project". The site says "Independent project for CS 124"; Kamran confirmed the repo wording (2026-11-25). |
 | Live at https://mise-recipe-box.netlify.app (public, returns 200) | Linked as "Try it live"; the repo itself isn't linked because it's private |
-| Recipes: TheMealDB (~790) + Wikibooks Cookbook (3,492 in `public/wikibooks.json`) ≈ 4,300 | Resume says "close to 1,000" |
+| Recipes: TheMealDB (~790) + Wikibooks Cookbook (3,492 in `public/wikibooks.json`) ≈ 4,300 | Resume says "close to 1,000"; Kamran confirmed the repo count (2026-11-25) |
 | Nutrition from USDA food data (`public/foods.json`); matcher prefers leaving an ingredient blank to guessing | |
 | Diets and nine allergens checked per ingredient; never claims allergen-free | |
 | Pantry with amounts, cook mode with timers, meal calendar, shopping list, daily log against goals, installable PWA with a service worker | |

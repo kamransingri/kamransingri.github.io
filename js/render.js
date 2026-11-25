@@ -38,10 +38,6 @@
     return (prefix || "") + href;
   }
 
-  function slugTag(t) {
-    return t.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  }
-
   /* ---------- Intro ---------- */
   function intro(S) {
     var p = S.person;
@@ -247,31 +243,11 @@
     return p.status ? ' <span class="status mono">' + esc(p.status) + "</span>" : "";
   }
 
-  function filters(S) {
-    var seen = {}, tags = [];
-    S.projects.forEach(function (p) {
-      p.tags.forEach(function (t) { if (!seen[t]) { seen[t] = 1; tags.push(t); } });
-    });
-    return (
-      '<div class="filters" role="group" aria-label="Filter projects by tag" hidden>' +
-      '<button type="button" class="chip" aria-pressed="true" data-filter="all">All</button>' +
-      tags.map(function (t) {
-        return '<button type="button" class="chip" aria-pressed="false" data-filter="' + slugTag(t) + '">' + esc(t) + "</button>";
-      }).join("") +
-      '<p class="filter-count mono" aria-live="polite"></p>' +
-      "</div>"
-    );
-  }
-
-  function dataTags(p) {
-    return p.tags.map(slugTag).join(" ");
-  }
-
   function featured(S) {
     return S.projects.filter(function (p) { return p.featured; }).map(function (p, i) {
       var links = [{ label: "Read the write-up", href: "projects/" + p.slug + ".html" }].concat(p.links || []);
       return (
-        '<article class="project" data-tags="' + dataTags(p) + '" aria-labelledby="pj-' + p.slug + '">' +
+        '<article class="project" aria-labelledby="pj-' + p.slug + '">' +
         '<div class="project-text">' +
         '<p class="idx mono">' + String(i + 1).padStart(2, "0") + (p.context ? " · " + esc(p.context) : "") + "</p>" +
         '<h3 id="pj-' + p.slug + '"><a href="projects/' + p.slug + '.html">' + esc(p.title) + "</a>" + status(p) + "</h3>" +
@@ -292,7 +268,7 @@
     return '<ul class="others">' +
       S.projects.filter(function (p) { return !p.featured; }).map(function (p) {
         return (
-          '<li class="other" data-tags="' + dataTags(p) + '">' +
+          '<li class="other">' +
           '<h4>' + esc(p.title) + status(p) + "</h4>" +
           "<p>" + inline(p.summary) + "</p>" +
           (p.details ? '<p class="muted">' + inline(p.details) + "</p>" : "") +
@@ -424,7 +400,7 @@
   var api = {
     esc: esc, inline: inline, intro: intro, about: about, experience: experience,
     chartSvg: function (S, o) { return chart(S, o).svg; },
-    filters: filters, featured: featured, others: others, education: education,
+    featured: featured, others: others, education: education,
     activities: activities, contact: contact, projectPage: projectPage
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;

@@ -27,7 +27,7 @@ function fill(html, key, inner) {
 // Home page
 const indexPath = path.join(root, "index.html");
 let index = fs.readFileSync(indexPath, "utf8");
-for (const k of ["intro", "about", "experience", "filters", "featured", "others", "education", "activities", "contact"]) {
+for (const k of ["intro", "about", "experience", "featured", "others", "education", "activities", "contact"]) {
   index = fill(index, k, R[k](S));
 }
 fs.writeFileSync(indexPath, index);

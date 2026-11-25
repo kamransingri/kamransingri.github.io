@@ -22,7 +22,7 @@ Kamran Singri's personal site. It's plain HTML, CSS and vanilla JavaScript, with
 - Keep the quotes and commas. If the page goes blank after an edit, a missing comma or quote is the usual cause. Open the browser console to see the line number.
 
 **Projects:**
-- Each project has `slug`, `title`, `summary`, `tags` (these drive the filter buttons), `stack` (shown as small labels) and optional `links`.
+- Each project has `slug`, `title`, `summary`, `tags` (not shown on the page; kept as metadata), `stack` (shown as small labels) and optional `links`.
 - **To feature a project:** set `featured: true`. Featured projects also need a `visual` and a `page` block (`question`, `built`, `techniques`, `learned`, optional `extras`). The four existing ones are good templates.
 - **To add a code link to a project:**
   ```js

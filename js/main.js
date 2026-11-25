@@ -13,7 +13,7 @@
     var p = S.projects.filter(function (x) { return x.slug === slug; })[0];
     if (p) document.title = p.title + " · " + S.person.name;
   } else {
-    ["intro", "about", "experience", "filters", "featured", "others", "education", "activities", "contact"].forEach(function (k) {
+    ["intro", "about", "experience", "featured", "others", "education", "activities", "contact"].forEach(function (k) {
       var el = document.querySelector('[data-render="' + k + '"]');
       if (el && R[k]) el.innerHTML = R[k](S);
     });
@@ -105,33 +105,6 @@
       });
     }, { rootMargin: "-40% 0px -55% 0px" });
     Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
-  }
-
-  /* Project filter by tag. */
-  var bar = document.querySelector(".filters");
-  if (bar) {
-    bar.hidden = false;
-    var items = document.querySelectorAll(".project[data-tags], .other[data-tags]");
-    var otherTitle = document.getElementById("other-title");
-    var empty = document.querySelector(".filter-empty");
-    var count = bar.querySelector(".filter-count");
-    bar.addEventListener("click", function (e) {
-      var btn = e.target.closest("button[data-filter]");
-      if (!btn) return;
-      var f = btn.getAttribute("data-filter");
-      Array.prototype.forEach.call(bar.querySelectorAll("button[data-filter]"), function (b) {
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      var shown = 0, othersShown = 0;
-      Array.prototype.forEach.call(items, function (it) {
-        var ok = f === "all" || (" " + it.getAttribute("data-tags") + " ").indexOf(" " + f + " ") >= 0;
-        it.hidden = !ok;
-        if (ok) { shown++; if (it.classList.contains("other")) othersShown++; }
-      });
-      if (otherTitle) otherTitle.hidden = othersShown === 0;
-      if (empty) empty.hidden = shown !== 0;
-      if (count) count.textContent = f === "all" ? "" : shown + " of " + items.length + " shown";
-    });
   }
 
   /* Copy email with a short confirmation. */

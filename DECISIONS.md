@@ -73,3 +73,8 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
 - **Order:** Projects (01) → About (02) → Experience (03, with Leadership & activities as a sub-list) → Education & skills (04) → Contact. The nav dropped Activities, leaving five links.
 - **Education & skills:** on wide screens they sit side by side in one band; on phones they stack.
 - **Sub-headings** ("Other projects", "Leadership & activities") are unnumbered h3s; their items are h4s. "03b" is gone.
+
+## Distill (after the Impeccable critique)
+- **Project filter removed.** Six chips for seven projects added a decision without saving any effort, and "1 of 6 shown" on the Data filter advertised thinness. `tags` stay in `data.js` as metadata if a filter is ever worth bringing back (10+ projects).
+- **NBA code excerpt removed.** The 6-line `nba_four_point_graphs.py` file read as negative evidence next to the EPA analysis and simulation work.
+- **NBA techniques trimmed** to EPA by shot distance, Monte Carlo simulation and pandas. "Module structure" repeated a "What I built" bullet, and "Git with a team" said nothing specific.

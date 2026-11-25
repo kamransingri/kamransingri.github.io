@@ -154,20 +154,10 @@ window.SITE = {
           "Early on, I reorganized the repo so data loading (`nba_four_point_datasets.py`) and graphing (`nba_four_point_graphs.py`) live in separate modules.",
           "Now I'm helping build the presentation of our findings for the club board."
         ],
-        extras: [
-          {
-            type: "code",
-            file: "nba_four_point_graphs.py",
-            caption: "The graphing module I set up (the full file as committed). It pulls in the loaded DataFrame from the dataset module so graph code stays separate.",
-            text: "#MAKE GRAPHS HERE\nimport pandas as pd\n#Imports other python file so we can use its variables and functions\nimport nba_four_point_datasets\n#To access these var and functions do file name.variable_name or file name.function_name\nprint(nba_four_point_datasets.df)"
-          }
-        ],
         techniques: [
           ["EPA by shot distance", "Weighing each shot's point value against its distance to find where a four-point line would keep the three-pointer worth taking."],
           ["Monte Carlo simulation", "Helped scope what the team's simulation models, and its backtest on the 2024-25 and 2025-26 seasons."],
-          ["pandas", "Loading the shot-distance CSVs into DataFrames."],
-          ["Module structure", "Separating data loading from graphing so teammates can work on graphs without touching the data-loading code."],
-          ["Git with a team", "Working in a shared repo in the club's GitHub organization."]
+          ["pandas", "Loading the shot-distance CSVs into DataFrames."]
         ],
         learned:
           "On a team of five, splitting the work cleanly matters: separate files for loading and graphing let us work in parallel, and agreeing on exactly what the simulation should model let a teammate build it. The chart on this page is my own quick look at the data. Accuracy drops steadily past the current line, and very few shots come from 30+ feet, so any four-point estimate that far out rests on small samples.",

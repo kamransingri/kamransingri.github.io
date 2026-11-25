@@ -29,7 +29,21 @@ window.SITE = {
     "Before college I mentored elementary schoolers through Computer Science Kids, tutored high school students in math, and ran track. I've also packed meals with Kids Against Hunger since 2016. Away from the keyboard, most of my free time goes to sports, music, the gym and cooking."
   ],
 
+  // Newest first (by end date).
   experience: [
+    {
+      role: "Tutor",
+      org: "Math Tutoring",
+      place: "Hoffman Estates, IL",
+      start: "Sep 2025",
+      end: "Jan 2026",
+      summary:
+        "Tutored high school students twice a week in everything from geometry to calculus.",
+      details: [
+        "Worked one on one with 5+ students a session, using visual demonstrations and worked examples.",
+        "Worked with the other tutors on different ways to explain a topic when a student was stuck."
+      ]
+    },
     {
       role: "Mentor",
       org: "Computer Science Kids",
@@ -42,19 +56,6 @@ window.SITE = {
         "Turned abstract programming ideas into lessons that made sense to elementary schoolers.",
         "Ran large-group activities for up to 60 students per session.",
         "Designed and ran hands-on activities with a team of other mentors to reinforce core CS concepts."
-      ]
-    },
-    {
-      role: "Tutor",
-      org: "Math Tutoring",
-      place: "Hoffman Estates, IL",
-      start: "Sep 2025",
-      end: "Jan 2026",
-      summary:
-        "Tutored high school students twice a week in everything from geometry to calculus.",
-      details: [
-        "Worked one on one with 5+ students a session, using visual demonstrations and worked examples.",
-        "Worked with the other tutors on different ways to explain a topic when a student was stuck."
       ]
     }
   ],

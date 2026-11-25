@@ -136,8 +136,11 @@ code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); 
 .brand:hover { border-color: var(--accent); }
 .site-nav nav { margin-left: auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 @media (max-width: 720px) {
-  .site-nav nav { -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
-  .nav-links { padding-right: 1.5rem; }
+  /* A fixed-width fade hints the strip scrolls; the trailing spacer is wider than the fade,
+     so the last link ("Contact") clears it when the strip is scrolled to the end.
+     (Padding on a flex scroller doesn't extend its scroll width in every browser; a spacer does.) */
+  .site-nav nav { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent); }
+  .nav-links::after { content: ""; flex: 0 0 2.5rem; }
 }
 .site-nav nav::-webkit-scrollbar { display: none; }
 .nav-links { list-style: none; display: flex; gap: 0.25rem; }
@@ -300,7 +303,8 @@ details.more li { margin-bottom: 0.35rem; }
 .other p { margin-bottom: 0.4rem; }
 .other .muted { font-size: 0.98rem; }
 @media (min-width: 880px) {
-  .others { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+  /* Fits however many other projects there are, without leaving an empty column */
+  .others { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2.5rem; }
   .other, .other:first-child { border-top: 1px solid var(--rule); padding-top: 1.25rem; }
 }
 

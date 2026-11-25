@@ -99,7 +99,12 @@
           a.setAttribute("aria-current", "location");
           if (a.scrollIntoView && window.innerWidth < 720) {
             var nav = a.closest("nav");
-            if (nav) nav.scrollTo({ left: a.offsetLeft - 16, behavior: reduceMotion ? "auto" : "smooth" });
+            // Measure against the scrolling <nav> itself. a.offsetLeft is relative to the
+            // sticky header, so it overshot by the nav's own offset and clipped the label.
+            if (nav) {
+              var left = a.getBoundingClientRect().left - nav.getBoundingClientRect().left + nav.scrollLeft - 16;
+              nav.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? "auto" : "smooth" });
+            }
           }
         } else a.removeAttribute("aria-current");
       });

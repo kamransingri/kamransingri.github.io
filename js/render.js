@@ -181,9 +181,15 @@
       '<text class="ref-label" x="' + (arc + 6).toFixed(1) + '" y="' + (H - m.b - 8) + '">' + (narrow ? "arc 23′9″" : "current arc, 23′9″") + '</text>';
     var pts = rows.map(function (r) { return [X(r.ft), Y(r.made / r.att)]; });
     var path = "M" + pts.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join("L");
+    // 95% confidence interval for each distance (normal approximation to the binomial)
+    function ci(r) { var p = r.made / r.att; return 1.96 * Math.sqrt(p * (1 - p) / r.att); }
+    var errs = rows.map(function (r, i) {
+      var p = r.made / r.att, e = ci(r), x = pts[i][0].toFixed(1);
+      return '<line class="err" x1="' + x + '" x2="' + x + '" y1="' + Y(p + e).toFixed(1) + '" y2="' + Y(p - e).toFixed(1) + '"/>';
+    }).join("");
     var dots = rows.map(function (r, i) {
       var pct = (r.made / r.att * 100).toFixed(1);
-      var label = r.ft + " ft: " + pct + "% (" + r.made.toLocaleString("en-US") + " of " + r.att.toLocaleString("en-US") + ")";
+      var label = r.ft + " ft: " + pct + "% ± " + (ci(r) * 100).toFixed(1) + " (" + r.made.toLocaleString("en-US") + " of " + r.att.toLocaleString("en-US") + ")";
       return '<g class="pt" tabindex="' + (i === 0 ? 0 : -1) + '" role="listitem" aria-label="' + label + '" data-tip="' + label + '">' +
         '<circle class="hit" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="14"/>' +
         '<circle class="dot" cx="' + pts[i][0].toFixed(1) + '" cy="' + pts[i][1].toFixed(1) + '" r="4.5"/>' +
@@ -197,15 +203,17 @@
       '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-labelledby="nba-chart-title">' +
       '<title id="nba-chart-title">3-point percentage by shot distance, ' + first.ft + " to " + last.ft + " feet</title>" +
       grid + ylab + xlab + arcLine +
+      '<text class="axis-label" x="4" y="12">' + esc(C.yLabel) + "</text>" +
+      errs +
       '<path class="line" d="' + path + '"/>' +
       '<g role="list">' + dots + "</g>" + direct +
       '<text class="axis-label" x="' + ((m.l + W - m.r) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(C.xLabel) + "</text>" +
       "</svg>";
     var table =
       '<details class="data-table"><summary>Show the numbers</summary><div class="table-wrap"><table>' +
-      '<thead><tr><th scope="col">Distance</th><th scope="col">Made</th><th scope="col">Attempted</th><th scope="col">3P%</th></tr></thead><tbody>' +
+      '<thead><tr><th scope="col">Distance</th><th scope="col">Made</th><th scope="col">Attempted</th><th scope="col">3-point %</th><th scope="col">95% CI</th></tr></thead><tbody>' +
       rows.map(function (r) {
-        return "<tr><td>" + r.ft + " ft</td><td>" + r.made.toLocaleString("en-US") + "</td><td>" + r.att.toLocaleString("en-US") + "</td><td>" + (r.made / r.att * 100).toFixed(1) + "%</td></tr>";
+        return "<tr><td>" + r.ft + " ft</td><td>" + r.made.toLocaleString("en-US") + "</td><td>" + r.att.toLocaleString("en-US") + "</td><td>" + (r.made / r.att * 100).toFixed(1) + "%</td><td>± " + (ci(r) * 100).toFixed(1) + "</td></tr>";
       }).join("") +
       "</tbody></table></div></details>";
     return { svg: svg, table: table };
@@ -229,6 +237,7 @@
     if (v.type === "sprites") return sprites(v, prefix);
     if (v.type === "image") return image(v, prefix);
     if (v.type === "board") return board(v);
+    if (v.type === "diagram") return diagram(v);
     if (v.type === "chart") return chartFigure(S, v, opts);
     return "";
   }
@@ -249,8 +258,9 @@
       return (
         '<article class="project" aria-labelledby="pj-' + p.slug + '">' +
         '<div class="project-text">' +
-        '<p class="idx mono">' + String(i + 1).padStart(2, "0") + (p.context ? " · " + esc(p.context) : "") + "</p>" +
-        '<h3 id="pj-' + p.slug + '"><a href="projects/' + p.slug + '.html">' + esc(p.title) + "</a>" + status(p) + "</h3>" +
+        (p.context ? '<p class="idx mono">' + esc(p.context) + "</p>" : "") +
+        // The title links to the write-up too, but "Read the write-up" below is the one tab stop.
+        '<h3 id="pj-' + p.slug + '"><a href="projects/' + p.slug + '.html" tabindex="-1">' + esc(p.title) + "</a>" + status(p) + "</h3>" +
         "<p>" + inline(p.summary) + "</p>" +
         tagList(p) +
         '<ul class="project-links">' +
@@ -374,10 +384,11 @@
     return (
       '<p class="crumb mono"><a href="../index.html#projects">← All projects</a></p>' +
       '<header class="page-head">' +
-      '<p class="kicker mono">' + (p.context ? esc(p.context) : "Project") + "</p>" +
       "<h1>" + esc(p.title) + status(p) + "</h1>" +
+      (p.context ? '<p class="page-meta mono">' + esc(p.context) + "</p>" : "") +
       '<p class="lede">' + inline(p.summary) + "</p>" +
       tagList(p) +
+      (g.note ? '<p class="code-note mono">' + inline(g.note) + "</p>" : "") +
       "</header>" +
       '<div class="page-visual">' + visual(S, p, "../", { tall: true }) + "</div>" +
       '<section aria-labelledby="q"><h2 id="q"><span class="sec-num mono">01</span>The question</h2><p>' + inline(g.question) + "</p></section>" +
@@ -389,10 +400,9 @@
       g.techniques.map(function (t) { return "<div><dt>" + esc(t[0]) + "</dt><dd>" + inline(t[1]) + "</dd></div>"; }).join("") +
       "</dl></section>" +
       '<section aria-labelledby="l"><h2 id="l"><span class="sec-num mono">04</span>What I learned</h2><p>' + inline(g.learned) + "</p></section>" +
-      '<section aria-labelledby="k"><h2 id="k"><span class="sec-num mono">05</span>Links</h2>' +
-      (links ? '<ul class="link-row">' + links + "</ul>" : "") +
-      (g.note ? '<p class="muted">' + inline(g.note) + "</p>" : "") +
-      "</section>" +
+      (links
+        ? '<section aria-labelledby="k"><h2 id="k"><span class="sec-num mono">05</span>Links</h2><ul class="link-row">' + links + "</ul></section>"
+        : "") +
       '<nav class="next" aria-label="Next project"><a href="' + next.slug + '.html"><span class="mono small">Next project</span> <span>' + esc(next.title) + ' <span aria-hidden="true">→</span></span></a></nav>'
     );
   }

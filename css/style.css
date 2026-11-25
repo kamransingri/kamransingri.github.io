@@ -37,6 +37,7 @@
   --accent-ink: #ffffff;
   --accent-soft: rgba(165, 61, 27, 0.1);
   --focus: #a53d1b;
+  --sprite-tray: #efebe3;     /* the game sprites were drawn for a light ground */
 
   --serif: "Source Serif 4", "Iowan Old Style", "Charter", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -60,6 +61,7 @@
     --accent-ink: #161513;
     --accent-soft: rgba(240, 144, 110, 0.12);
     --focus: #f0906e;
+    --sprite-tray: #c9c3b8;   /* still light enough for the dark sprites, without the glare */
   }
 }
 :root[data-theme="dark"] {
@@ -74,6 +76,7 @@
   --accent-ink: #161513;
   --accent-soft: rgba(240, 144, 110, 0.12);
   --focus: #f0906e;
+  --sprite-tray: #c9c3b8;
 }
 
 /* ---------- Base ---------- */
@@ -103,6 +106,14 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; font-weight: 600; }
 ul, ol { margin: 0; padding: 0; }
 code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); padding: 0.1em 0.35em; border-radius: 3px; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+/* No one-word last lines in body copy; headings break evenly */
+p, li, dd, figcaption { text-wrap: pretty; }
+h1, h2, h3, h4 { text-wrap: balance; }
+/* Browser surfaces in the site's own colors */
+::selection { background: color-mix(in srgb, var(--accent) 28%, var(--bg)); color: var(--text); }
+.table-wrap, .code-excerpt { scrollbar-color: var(--tick) transparent; }
+.data-table table { font-variant-numeric: tabular-nums; }
 
 .mono { font-family: var(--mono); letter-spacing: 0; }
 .small { font-size: 0.8rem; }
@@ -173,7 +184,6 @@ code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); 
 
 /* ---------- Intro ---------- */
 .intro { padding: clamp(3rem, 9vw, 6rem) 0 clamp(1rem, 3vw, 2rem); }
-.kicker { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
 .intro h1 { font-size: clamp(2.75rem, 8vw, 4.5rem); letter-spacing: -0.025em; font-weight: 600; margin-bottom: 0.9rem; }
 /* The at-a-glance facts a recruiter screens on, right under the name */
 .creds { list-style: none; display: flex; flex-wrap: wrap; gap: 0.2rem 0; margin: 0 0 1.5rem; font-size: 0.85rem; color: var(--muted); }
@@ -275,6 +285,7 @@ details.more li { margin-bottom: 0.35rem; }
 .chart .axis-label { fill: var(--muted); font-size: 11px; }
 .chart .ref { stroke: var(--tick); stroke-width: 1; stroke-dasharray: 3 3; }
 .chart .ref-label { fill: var(--muted); font-size: 11px; }
+.chart .err { stroke: var(--accent); stroke-opacity: 0.4; stroke-width: 2; stroke-linecap: round; }
 .chart .line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .chart .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
 .chart .hit { fill: transparent; }
@@ -346,8 +357,11 @@ details.more li { margin-bottom: 0.35rem; }
 .crumb { font-size: 0.85rem; margin: 0 0 2.5rem; }
 .crumb a { color: var(--muted); text-decoration: none; }
 .crumb a:hover { color: var(--accent); }
-.page-head h1 { font-size: clamp(2.25rem, 6vw, 3.25rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+.page-head h1 { font-size: clamp(2.25rem, 6vw, 3.25rem); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+/* Context line under a page title (team, dates), same role as the homepage's at-a-glance line */
+.page-meta { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.25rem; }
 .page-head .lede { margin-bottom: 0.75rem; }
+.code-note { font-size: 0.8rem; color: var(--muted); margin: 0.25rem 0 0; }
 .page-visual { margin: 2rem 0 0.5rem; }
 .page section { margin-top: 2.75rem; }
 .page section::before {
@@ -374,6 +388,9 @@ details.more li { margin-bottom: 0.35rem; }
 .dg-label { font-size: 0.72rem; color: var(--muted); margin: 0 0 0.4rem; }
 .dg ul { list-style: none; }
 .dg li { font-size: 0.95rem; padding: 0.15rem 0; }
+/* In a homepage project card the diagram has about a third of the room it has on its own page */
+.project-visual .diagram { gap: 0.75rem 1rem; }
+.project-visual .dg li { font-size: 0.875rem; white-space: nowrap; }
 .dg li::before { content: "├ "; font-family: var(--mono); color: var(--tick); }
 .dg li:last-child::before { content: "└ "; }
 .code-excerpt { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.55; }
@@ -384,8 +401,8 @@ details.more li { margin-bottom: 0.35rem; }
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
-/* Sprites were drawn for a light background, so keep their tray light in both themes. */
-.visual-sprites .sprite-row { background: #efebe3; border-color: var(--rule); }
+/* Sprites were drawn for a light background, so their tray stays light; dark mode dims it. */
+.visual-sprites .sprite-row { background: var(--sprite-tray); border-color: var(--rule); }
 
 /* ---------- Touch: every control gets a 44px target; mouse layouts stay as drawn ---------- */
 @media (pointer: coarse) {
@@ -420,7 +437,6 @@ details.more li { margin-bottom: 0.35rem; }
   .intro { padding: 0 0 0.5cm; }
   .intro h1 { font-size: 26pt; margin-bottom: 0.2cm; }
   .lede { font-size: 11.5pt; }
-  .kicker { margin-bottom: 0.2cm; }
   .creds { margin-bottom: 0.25cm; }
   .seeking::before { display: none; }
   .edu-band { display: block; }
@@ -448,8 +464,7 @@ details.more li { margin-bottom: 0.35rem; }
 }
 
 /* ---------- Small details: 404, focus, anchors ---------- */
-.nf-title { font-size: clamp(2.25rem, 7vw, 3.5rem); letter-spacing: -0.02em; margin: 0 0 1rem; }
-.page .wrap > .kicker { margin-top: clamp(2rem, 8vw, 5rem); }
+.nf-title { font-size: clamp(2.25rem, 7vw, 3.5rem); letter-spacing: -0.02em; margin: clamp(2rem, 8vw, 5rem) 0 0.75rem; }
 /* Visible, consistent focus rings on every interactive thing */
 .btn:focus-visible, .theme-toggle:focus-visible, .brand:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .nav-links a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 3px; }

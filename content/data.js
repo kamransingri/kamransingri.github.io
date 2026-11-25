@@ -72,15 +72,14 @@ window.SITE = {
       tags: ["Java", "Games"],
       stack: ["Java", "JavaFX", "Object-oriented design"],
       links: [],
+      // The class structure shows the engineering; the sprites live on the write-up page.
       visual: {
-        type: "sprites",
-        caption: "Sprites from the game: three robot defenders and two of the aliens.",
-        images: [
-          { src: "assets/img/pvz/defenders/RobotShooter.webp", alt: "Robot Shooter defender sprite" },
-          { src: "assets/img/pvz/defenders/RobotShield.webp", alt: "Robot Shield defender sprite" },
-          { src: "assets/img/pvz/defenders/RobotMineActivated.webp", alt: "Robot Mine defender sprite" },
-          { src: "assets/img/pvz/enemies/BasicAlien.webp", alt: "Basic Alien enemy sprite" },
-          { src: "assets/img/pvz/enemies/DashingAlien.webp", alt: "Dashing Alien enemy sprite" }
+        type: "diagram",
+        caption: "How the game is organized: two class hierarchies plus the systems that drive them.",
+        groups: [
+          { label: "Enemy classes", items: ["Basic Alien", "Dashing Alien", "Stealer Alien"] },
+          { label: "Defender classes", items: ["Robot Shooter", "Robot Shield", "Robot Mine"] },
+          { label: "Game systems", items: ["Wave timer (30 s)", "Energy economy", "Power-ups", "JavaFX game loop"] }
         ]
       },
       page: {
@@ -94,12 +93,14 @@ window.SITE = {
         ],
         extras: [
           {
-            type: "diagram",
-            caption: "How the game is organized: two class hierarchies plus the systems that drive them.",
-            groups: [
-              { label: "Aliens (enemy hierarchy)", items: ["Basic Alien", "Dashing Alien", "Stealer Alien"] },
-              { label: "Robots (defender hierarchy)", items: ["Robot Shooter", "Robot Shield", "Robot Mine"] },
-              { label: "Systems", items: ["30-second wave timer", "Energy economy", "Power-ups", "JavaFX game loop"] }
+            type: "sprites",
+            caption: "Sprites from the game: three robot defenders and two of the aliens.",
+            images: [
+              { src: "assets/img/pvz/defenders/RobotShooter.webp", alt: "Robot Shooter defender sprite" },
+              { src: "assets/img/pvz/defenders/RobotShield.webp", alt: "Robot Shield defender sprite" },
+              { src: "assets/img/pvz/defenders/RobotMineActivated.webp", alt: "Robot Mine defender sprite" },
+              { src: "assets/img/pvz/enemies/BasicAlien.webp", alt: "Basic Alien enemy sprite" },
+              { src: "assets/img/pvz/enemies/DashingAlien.webp", alt: "Dashing Alien enemy sprite" }
             ]
           },
           {
@@ -122,7 +123,7 @@ window.SITE = {
         ],
         learned:
           "This project was a real workout in object-oriented design. With six unit types, an economy and a wave system all running in one loop, the class hierarchies are what keep the game manageable.",
-        note: "Code isn't public yet."
+        note: "Code available on request."
       }
     },
     {
@@ -142,7 +143,7 @@ window.SITE = {
         type: "chart",
         takeaway: "Three-point accuracy falls from 42.4% at 23 feet to 28.5% at 31 feet.",
         caption:
-          "Three-point percentage by shot distance for each season's 50 players with the most made threes, 2021-22 to 2025-26. The 22 ft point is mostly corner threes, which sit closer than the arc. I computed this from the team's dataset for the site; it isn't a team result.",
+          "Three-point percentage by shot distance for each season's 50 players with the most made threes, 2021-22 to 2025-26. The 22 ft point is mostly corner threes, which sit closer than the arc. Bars show 95% confidence intervals, which widen past 30 feet where there are fewer shots. I computed this from the team's dataset for the site; it isn't a team result.",
         source: "nba"
       },
       page: {
@@ -195,7 +196,7 @@ window.SITE = {
         ],
         learned:
           "The infection piece is where breadth-first search stopped being abstract for me: handle one step, then the next, and stop at a cap. Keeping every special piece in its own class also made the shop easy to extend.",
-        note: "Code isn't public yet."
+        note: "Code available on request."
       }
     },
     {
@@ -359,7 +360,7 @@ window.SITE = {
   charts: {
     nba: {
       xLabel: "Shot distance (ft)",
-      yLabel: "3P%",
+      yLabel: "3-point %",
       line: 0.4, // reference line drawn at 40%
       rows: [
         { ft: 22, made: 2990, att: 7101 },

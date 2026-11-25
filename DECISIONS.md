@@ -78,3 +78,12 @@ The reference sites (brittanychiang.com, leerob.com, joshwcomeau.com, paco.me, r
 - **Project filter removed.** Six chips for seven projects added a decision without saving any effort, and "1 of 6 shown" on the Data filter advertised thinness. `tags` stay in `data.js` as metadata if a filter is ever worth bringing back (10+ projects).
 - **NBA code excerpt removed.** The 6-line `nba_four_point_graphs.py` file read as negative evidence next to the EPA analysis and simulation work.
 - **NBA techniques trimmed** to EPA by shot distance, Monte Carlo simulation and pandas. "Module structure" repeated a "What I built" bullet, and "Git with a team" said nothing specific.
+
+## Polish (final pass of the critique fixes)
+- **Tower Defense card** shows the class-structure diagram instead of the sprite row. The sprites (which Kamran likely didn't draw) stay on the write-up page.
+- **Project labels:** no more 01–04 numbers on project cards. A context line (team, dates, "Playable in the browser") shows only where there is one.
+- **Labels above titles are gone** (write-ups and 404). The context sits under the title instead, like the homepage's at-a-glance line.
+- **"Code isn't public yet"** is now "Code available on request." under the tags. The Links section only appears when there are links.
+- **NBA chart:** "3-point %" y-axis label, and 95% confidence-interval bars (normal approximation), also in the tooltip and the numbers table.
+- **Dark mode sprite tray:** still light (the dark sprites vanish on a dark ground), but dimmed to `#c9c3b8` via `--sprite-tray`.
+- **Small finish:** `text-wrap: pretty`/`balance`, themed text selection and scrollbars, tabular numbers in the data table. The project title isn't its own tab stop ("Read the write-up" is).

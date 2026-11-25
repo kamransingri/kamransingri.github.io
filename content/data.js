@@ -249,7 +249,7 @@ window.SITE = {
       visual: {
         type: "board",
         caption:
-          "Illustration, not a screenshot. The infector (●) lands and takes over touching opponent pieces breadth-first: each number is the step a piece was captured on. The real piece stops after 20 tiles. Dark pieces are the player's own."
+          "Illustration, not a screenshot. The infector (●) lands and takes over touching opponent pieces breadth-first: each number is the step a piece was captured on. The real piece stops after 20 tiles. Solid grey pieces are the player's own; outlined ones are the opponent's."
       },
       page: {
         question:
